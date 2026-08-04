@@ -33,9 +33,9 @@ Handy URLs while reviewing: `?lang=gu`, `?theme=dark`, or both.
 
 ```js
 var CONFIG = {
-  phone:        '+919876543210',   // tel: link
-  phoneDisplay: '+91 98765 43210', // shown on screen
-  whatsapp:     '919876543210',    // wa.me number, digits only
+  phone:        '+919426526594',   // tel: link
+  phoneDisplay: '+91 94265 26594', // shown on screen
+  whatsapp:     '919426526594',    // wa.me number, digits only
   waMessage:    'Hello Grevity! ...',
   formEndpoint: ''                 // Formspree URL / your webhook
 };

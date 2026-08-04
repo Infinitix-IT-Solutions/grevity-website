@@ -9,9 +9,9 @@
      CONFIG — SITE OWNER: change these five values and nothing else.
      --------------------------------------------------------- */
   var CONFIG = {
-    phone:        '+919876543210',        // tel: link (with country code, no spaces)
-    phoneDisplay: '+91 98765 43210',      // shown on screen
-    whatsapp:     '919876543210',         // wa.me number: country code + number, digits only
+    phone:        '+919426526594',        // tel: link (with country code, no spaces)
+    phoneDisplay: '+91 94265 26594',      // shown on screen
+    whatsapp:     '919426526594',         // wa.me number: country code + number, digits only
     waMessage:    'Hello Grevity! I would like a free demo of your billing and inventory software.',
     formEndpoint: ''                      // e.g. 'https://formspree.io/f/xxxx' or your webhook.
                                           // Leave '' to fall back to WhatsApp hand-off.

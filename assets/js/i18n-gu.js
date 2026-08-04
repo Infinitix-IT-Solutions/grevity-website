@@ -236,7 +236,6 @@ window.GREVITY_GU = {
   'footer.about': 'શા માટે રાજકોટ',
   'footer.stories': 'ગ્રાહકોની વાત',
   'footer.contact': 'સંપર્ક',
-  'footer.addr': 'Grevity સોફ્ટવેર<br>150 ફૂટ રિંગ રોડ, રાજકોટ<br>ગુજરાત 360005, ભારત',
   'footer.rights': 'સર્વાધિકાર સુરક્ષિત.',
   'footer.privacy': 'ગોપનીયતા',
   'footer.terms': 'શરતો',
