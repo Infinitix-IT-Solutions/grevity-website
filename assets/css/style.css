@@ -708,8 +708,6 @@ button { font: inherit; color: inherit; }
 .footer__grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1.3fr; gap: 30px; }
 .footer__brand p { font-size: .9rem; max-width: 32ch; }
 .footer__brand .brand { margin-bottom: 14px; }
-.footer__made { display: flex; align-items: center; gap: 7px; font-weight: 600; color: var(--text); font-size: .88rem; }
-.footer__made .msym { color: var(--accent); font-size: 19px; }
 .footer__col { display: flex; flex-direction: column; gap: 9px; }
 .footer__col h4 { margin-bottom: 4px; }
 .footer__col a { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font-size: .9rem; transition: color .2s, transform .2s; }
