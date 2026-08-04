@@ -833,9 +833,9 @@ button { font: inherit; color: inherit; }
 @media (max-width: 860px) {
   .mobar { display: flex; }
   body { padding-bottom: 74px; }
-  .fab-wa { bottom: 88px; right: 14px; height: 50px; padding: 0 14px; }
-  .fab-wa__text { display: none; }
-  .fab-wa { padding: 0; width: 52px; justify-content: center; }
+  /* The sticky bottom bar already carries WhatsApp here, so the floating
+     button would only duplicate it and cover content. */
+  .fab-wa { display: none; }
 }
 
 @media (max-width: 720px) {
