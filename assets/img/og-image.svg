@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B1220"/>
+      <stop offset="60%" stop-color="#122043"/>
+      <stop offset="100%" stop-color="#0A2A2A"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#14B8A6"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5">
+      <stop offset="0%" stop-color="#2563EB" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#2563EB" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1010" cy="140" r="330" fill="url(#glow)"/>
+  <g opacity="0.09" stroke="#93C5FD" stroke-width="1">
+    <path d="M0 470h1200M0 550h1200M0 390h1200"/>
+  </g>
+
+  <!-- mark -->
+  <g transform="translate(88,72)">
+    <rect width="86" height="86" rx="24" fill="url(#mark)"/>
+    <path d="M59 31a20 20 0 1 0 3.6 11.5H45.6" fill="none" stroke="#fff" stroke-width="7.6" stroke-linecap="round"/>
+    <circle cx="65.5" cy="22" r="7" fill="#F59E0B"/>
+  </g>
+  <text x="196" y="130" fill="#FFFFFF" font-size="52" font-weight="bold" letter-spacing="-1">Grevity</text>
+
+  <text x="88" y="268" fill="#FFFFFF" font-size="72" font-weight="bold" letter-spacing="-2">Billing. Stock. Production.</text>
+  <text x="88" y="352" fill="#7DD3FC" font-size="72" font-weight="bold" letter-spacing="-2">One Platform.</text>
+
+  <text x="88" y="424" fill="#C7D2E6" font-size="30">GST billing, inventory &amp; production software for</text>
+  <text x="88" y="466" fill="#C7D2E6" font-size="30">manufacturers, traders and retailers in Gujarat.</text>
+
+  <g transform="translate(88,516)" font-size="23" fill="#E5EDFB">
+    <rect x="0" y="0" width="236" height="52" rx="26" fill="#FFFFFF" fill-opacity="0.08" stroke="#FFFFFF" stroke-opacity="0.18"/>
+    <text x="26" y="33">Made in Gujarat</text>
+    <rect x="256" y="0" width="180" height="52" rx="26" fill="#FFFFFF" fill-opacity="0.08" stroke="#FFFFFF" stroke-opacity="0.18"/>
+    <text x="282" y="33">GST Ready</text>
+    <rect x="468" y="0" width="290" height="52" rx="26" fill="#FFFFFF" fill-opacity="0.08" stroke="#FFFFFF" stroke-opacity="0.18"/>
+    <text x="494" y="33">Works Offline (Pendrive)</text>
+  </g>
+
+  <g transform="translate(792,196)" opacity="0.97">
+    <rect x="0" y="0" width="330" height="238" rx="18" fill="#0F172A" stroke="#22304F"/>
+    <rect x="0" y="0" width="330" height="34" rx="18" fill="#16213C"/>
+    <rect x="0" y="20" width="330" height="14" fill="#16213C"/>
+    <circle cx="22" cy="17" r="5" fill="#F87171"/><circle cx="40" cy="17" r="5" fill="#FBBF24"/><circle cx="58" cy="17" r="5" fill="#34D399"/>
+    <rect x="20" y="54" width="130" height="12" rx="6" fill="#334C7A"/>
+    <rect x="20" y="82" width="88" height="56" rx="10" fill="#1D4ED8" fill-opacity="0.35" stroke="#3B82F6" stroke-opacity="0.5"/>
+    <rect x="121" y="82" width="88" height="56" rx="10" fill="#0D9488" fill-opacity="0.3" stroke="#14B8A6" stroke-opacity="0.5"/>
+    <rect x="222" y="82" width="88" height="56" rx="10" fill="#F59E0B" fill-opacity="0.25" stroke="#F59E0B" stroke-opacity="0.5"/>
+    <g fill="#3B82F6" fill-opacity="0.75">
+      <rect x="20" y="188" width="26" height="26" rx="4"/>
+      <rect x="58" y="172" width="26" height="42" rx="4"/>
+      <rect x="96" y="196" width="26" height="18" rx="4"/>
+      <rect x="134" y="158" width="26" height="56" rx="4"/>
+      <rect x="172" y="178" width="26" height="36" rx="4"/>
+      <rect x="210" y="146" width="26" height="68" rx="4"/>
+      <rect x="248" y="166" width="26" height="48" rx="4"/>
+      <rect x="286" y="132" width="26" height="82" rx="4" fill="#14B8A6"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>Grevity — GST Billing, Inventory &amp; Production Software | Rajkot, Gujarat</title>
+<meta name="description" content="Grevity is offline GST billing, invoicing, inventory and production (BOM) software for manufacturers, traders and retailers in Rajkot and across Gujarat. Runs entirely from a USB pendrive — no internet, no server, one-time purchase. Book a free demo.">
+<meta name="keywords" content="offline billing software pendrive, billing software Rajkot, inventory management software Gujarat, GST billing software for manufacturers, billing software without internet, invoicing software Rajkot, BOM production software India, stock management software Gujarat, one-time purchase billing software">
+<meta name="author" content="Grevity">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://grevity.in/">
+
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Grevity">
+<meta property="og:locale" content="en_IN">
+<meta property="og:locale:alternate" content="gu_IN">
+<meta property="og:url" content="https://grevity.in/">
+<meta property="og:title" content="Grevity — Billing. Stock. Production. One Platform.">
+<meta property="og:description" content="GST billing, live inventory, BOM production tracking and party ledgers — running fully offline from a USB pendrive. Made in Gujarat, built for Rajkot's manufacturers and traders.">
+<meta property="og:image" content="https://grevity.in/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Grevity billing, stock and production software dashboard">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Grevity — Billing. Stock. Production. One Platform.">
+<meta name="twitter:description" content="GST billing, live inventory, BOM production tracking and party ledgers — fully offline from a USB pendrive. Made in Gujarat.">
+<meta name="twitter:image" content="https://grevity.in/assets/img/og-image.png">
+
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/favicon.svg">
+<link rel="manifest" href="/site.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap">
+<!--
+  Material Symbols, subset to only the icons this page uses.
+  IMPORTANT: icon_names MUST stay alphabetically sorted and every name must
+  exist in Material Symbols Rounded — otherwise Google returns 400 and NO
+  icons load at all. Add new icons in the right alphabetical position.
+-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=account_balance_wallet,arrow_forward,backup,call,chat,check_circle,close,dark_mode,description,expand_more,history,inventory_2,light_mode,location_on,lock,manage_search,menu,payments,picture_as_pdf,precision_manufacturing,receipt_long,request_quote,savings,settings_suggest,shield_lock,stacked_bar_chart,storefront,table_view,translate,trending_up,usb,verified,warning&display=block">
+
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<script>
+  // Applied before first paint to avoid a theme/language flash.
+  (function () {
+    var d = document.documentElement;
+    d.classList.add('js');
+    try {
+      // ?theme=dark and ?lang=gu let you link straight to a variant.
+      var q = new URLSearchParams(location.search);
+      var t = q.get('theme') || localStorage.getItem('grevity-theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      d.setAttribute('data-theme', t);
+      var l = q.get('lang') || localStorage.getItem('grevity-lang') || 'en';
+      if (l === 'gu') { d.setAttribute('data-lang', 'gu'); d.setAttribute('lang', 'gu'); }
+    } catch (e) { d.setAttribute('data-theme', 'light'); }
+  })();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Grevity",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Offline Billing, Invoicing and Inventory Management",
+      "operatingSystem": "Windows",
+      "description": "Offline GST billing, invoicing, inventory and BOM-based production management software for small and medium manufacturers, traders and retailers in India. Runs entirely from a USB pendrive with its own local database — no internet and no server required.",
+      "url": "https://grevity.in/",
+      "inLanguage": ["en-IN", "gu-IN"],
+      "featureList": "Runs fully offline from a USB pendrive, GST invoicing, HSN codes, live stock and low-stock alerts, bill of materials and production tracking, customer and supplier ledgers, payment tracking, multi-company management, business reports, Excel export, PDF invoices, audit logs, one-click backup and restore",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "First year",
+          "description": "Licensed Grevity pendrive with setup, data import, training and support included.",
+          "priceCurrency": "INR",
+          "price": "7000",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "Yearly renewal",
+          "description": "Keeps your licence, updates and support running. The only recurring charge.",
+          "priceCurrency": "INR",
+          "price": "5000",
+          "availability": "https://schema.org/InStock",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "5000",
+            "priceCurrency": "INR",
+            "billingDuration": 1,
+            "unitCode": "ANN"
+          }
+        }
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "name": "Grevity",
+      "image": "https://grevity.in/assets/img/og-image.png",
+      "url": "https://grevity.in/",
+      "telephone": "+91-98765-43210",
+      "priceRange": "₹₹",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "150 Feet Ring Road",
+        "addressLocality": "Rajkot",
+        "addressRegion": "Gujarat",
+        "postalCode": "360005",
+        "addressCountry": "IN"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Rajkot" },
+        { "@type": "State", "name": "Gujarat" },
+        { "@type": "Country", "name": "India" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Is my business data safe with Grevity?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Grevity keeps your entire database on your own USB pendrive, so your data never leaves your premises and is never uploaded anywhere. Access is protected by secure login and role-based control, every change is recorded in audit logs, and one-click backup and restore let you keep copies wherever you choose." } },
+        { "@type": "Question", "name": "Does Grevity work without internet?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Grevity is offline software only. It runs completely from a USB pendrive with its own local database — no internet connection, no server and no account are required. Plug it into any Windows computer and start billing." } },
+        { "@type": "Question", "name": "Are Grevity invoices GST ready?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Grevity supports GST invoicing with HSN codes, tax breakups, automatic invoice numbering with custom prefixes and financial-year sequencing, and one-click PDF invoice generation." } },
+        { "@type": "Question", "name": "Can I manage more than one company in Grevity?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Multi-company management lets you switch between all of your businesses from a single login, each with its own products, parties, invoice numbering and reports." } },
+        { "@type": "Question", "name": "Does Grevity support Gujarati and Hindi?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Our team supports you in Gujarati, Hindi and English over phone and WhatsApp, and this website is available in Gujarati. Product interface language options are expanding — ask during your demo." } }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to main content</a>
+
+<!-- ============ A. STICKY NAVBAR ============ -->
+<header class="nav" id="nav">
+  <div class="shell nav__inner">
+    <a class="brand" href="#hero" aria-label="Grevity — home">
+      <img class="brand__mark" src="/assets/img/logo-mark.svg" alt="" width="40" height="40">
+      <span class="brand__name">Grevity</span>
+    </a>
+
+    <nav class="nav__links" id="navLinks" aria-label="Primary">
+      <a href="#problem" data-i18n="nav.why">Why Grevity</a>
+      <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#local" data-i18n="nav.rajkot">Rajkot</a>
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+    </nav>
+
+    <div class="nav__actions">
+      <button class="iconbtn" id="langToggle" type="button" aria-label="Switch language to Gujarati" title="ગુજરાતી / English">
+        <span class="msym" aria-hidden="true">translate</span>
+        <span class="iconbtn__label" id="langLabel">ગુજ</span>
+      </button>
+      <button class="iconbtn" id="themeToggle" type="button" aria-label="Switch to dark mode">
+        <span class="msym icon-light" aria-hidden="true">light_mode</span>
+        <span class="msym icon-dark" aria-hidden="true">dark_mode</span>
+      </button>
+      <a class="btn btn--primary btn--sm nav__cta" href="#demo" data-i18n="cta.demo">Get Free Demo</a>
+      <button class="iconbtn nav__burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span class="msym icon-open" aria-hidden="true">menu</span>
+        <span class="msym icon-close" aria-hidden="true">close</span>
+      </button>
+    </div>
+  </div>
+  <div class="nav__progress" id="scrollProgress" aria-hidden="true"></div>
+</header>
+
+<main id="main">
+
+<!-- ============ B. HERO ============ -->
+<section class="hero" id="hero">
+  <div class="hero__bg" aria-hidden="true">
+    <span class="orb orb--1"></span>
+    <span class="orb orb--2"></span>
+    <span class="orb orb--3"></span>
+    <span class="grid-lines"></span>
+  </div>
+
+  <div class="shell hero__inner">
+    <div class="hero__copy">
+      <a class="pill pill--live reveal" href="#local">
+        <span class="pill__dot" aria-hidden="true"></span>
+        <span data-i18n="hero.badge">Now Live in Rajkot, Gujarat 🎉</span>
+      </a>
+
+      <h1 class="hero__title reveal" data-delay="1">
+        <span data-i18n="hero.h1a">Billing. Stock. Production.</span>
+        <span class="grad" data-i18n="hero.h1b">One Platform.</span>
+      </h1>
+
+      <p class="hero__rotator reveal" data-delay="2" aria-live="off">
+        <span data-i18n="hero.rotatorPre">Made for your business —</span>
+        <span class="rotator" id="rotator" data-words-en="Perfect for Traders|Perfect for Manufacturers|Perfect for Retailers"
+              data-words-gu="વેપારીઓ માટે પરફેક્ટ|ઉત્પાદકો માટે પરફેક્ટ|રિટેલરો માટે પરફેક્ટ">
+          <span class="rotator__word">Perfect for Traders</span>
+        </span>
+      </p>
+
+      <p class="hero__sub reveal" data-delay="3" data-i18n="hero.sub">
+        No more chasing bills in notebooks, half-broken Excel sheets and “kitna baaki hai?” phone calls.
+        Grevity brings GST invoicing, live stock, BOM-based production and party ledgers into one clean system
+        that runs entirely from a pendrive — no internet, no server, no monthly fee.
+      </p>
+
+      <div class="hero__cta reveal" data-delay="4">
+        <a class="btn btn--primary btn--lg" href="#demo">
+          <span data-i18n="cta.demoFree">Book a Free Demo</span>
+          <span class="msym" aria-hidden="true">arrow_forward</span>
+        </a>
+        <a class="btn btn--ghost btn--lg" href="#features" data-i18n="cta.explore">Explore Features</a>
+      </div>
+
+      <ul class="trustbar reveal" data-delay="5">
+        <li><span class="msym" aria-hidden="true">location_on</span><span data-i18n="trust.gujarat">Made in Gujarat</span></li>
+        <li><span class="msym" aria-hidden="true">verified</span><span data-i18n="trust.gst">GST Ready</span></li>
+        <li><span class="msym" aria-hidden="true">usb</span><span data-i18n="trust.offline">Works Offline — Pendrive Edition</span></li>
+        <li><span class="msym" aria-hidden="true">shield_lock</span><span data-i18n="trust.secure">Data Secured</span></li>
+      </ul>
+    </div>
+
+    <!-- Animated dashboard mockup (inline SVG so it follows light/dark theme) -->
+    <div class="hero__art reveal" data-delay="3">
+      <div class="device device--browser float">
+        <div class="device__bar">
+          <span class="dot dot--r"></span><span class="dot dot--y"></span><span class="dot dot--g"></span>
+          <span class="device__url">app.grevity.in/dashboard</span>
+        </div>
+        <div class="device__screen">
+          <svg viewBox="0 0 720 470" role="img" aria-labelledby="mockTitle" class="mock">
+            <title id="mockTitle">Grevity dashboard showing sales trend, stock levels and recent invoices</title>
+            <!-- sidebar -->
+            <rect x="0" y="0" width="132" height="470" class="mk-side"/>
+            <rect x="16" y="18" width="26" height="26" rx="8" class="mk-brand"/>
+            <rect x="50" y="26" width="52" height="10" rx="5" class="mk-bar-2"/>
+            <g class="mk-nav">
+              <rect x="14" y="70" width="104" height="26" rx="8" class="mk-active"/>
+              <rect x="26" y="79" width="62" height="8" rx="4" class="mk-bar-on"/>
+              <rect x="26" y="115" width="70" height="8" rx="4" class="mk-bar-2"/>
+              <rect x="26" y="147" width="54" height="8" rx="4" class="mk-bar-2"/>
+              <rect x="26" y="179" width="76" height="8" rx="4" class="mk-bar-2"/>
+              <rect x="26" y="211" width="60" height="8" rx="4" class="mk-bar-2"/>
+              <rect x="26" y="243" width="68" height="8" rx="4" class="mk-bar-2"/>
+              <rect x="26" y="275" width="48" height="8" rx="4" class="mk-bar-2"/>
+            </g>
+            <!-- topbar -->
+            <rect x="132" y="0" width="588" height="52" class="mk-top"/>
+            <rect x="156" y="20" width="120" height="12" rx="6" class="mk-bar-1"/>
+            <rect x="470" y="14" width="150" height="24" rx="12" class="mk-search"/>
+            <circle cx="660" cy="26" r="13" class="mk-avatar"/>
+            <!-- KPI cards -->
+            <g class="mk-kpi">
+              <rect x="156" y="74" width="170" height="86" rx="14" class="mk-card"/>
+              <rect x="176" y="94" width="62" height="8" rx="4" class="mk-bar-2"/>
+              <rect x="176" y="112" width="96" height="16" rx="6" class="mk-bar-1"/>
+              <rect x="176" y="138" width="46" height="8" rx="4" class="mk-up"/>
+
+              <rect x="342" y="74" width="170" height="86" rx="14" class="mk-card"/>
+              <rect x="362" y="94" width="52" height="8" rx="4" class="mk-bar-2"/>
+              <rect x="362" y="112" width="86" height="16" rx="6" class="mk-bar-1"/>
+              <rect x="362" y="138" width="58" height="8" rx="4" class="mk-up"/>
+
+              <rect x="528" y="74" width="170" height="86" rx="14" class="mk-card"/>
+              <rect x="548" y="94" width="66" height="8" rx="4" class="mk-bar-2"/>
+              <rect x="548" y="112" width="72" height="16" rx="6" class="mk-bar-1"/>
+              <rect x="548" y="138" width="40" height="8" rx="4" class="mk-warn"/>
+            </g>
+            <!-- chart card -->
+            <rect x="156" y="176" width="356" height="176" rx="14" class="mk-card"/>
+            <rect x="176" y="196" width="88" height="10" rx="5" class="mk-bar-1"/>
+            <g class="mk-bars">
+              <rect x="180" y="300" width="26" height="30" rx="5"/>
+              <rect x="221" y="284" width="26" height="46" rx="5"/>
+              <rect x="262" y="292" width="26" height="38" rx="5"/>
+              <rect x="303" y="262" width="26" height="68" rx="5"/>
+              <rect x="344" y="276" width="26" height="54" rx="5"/>
+              <rect x="385" y="246" width="26" height="84" rx="5"/>
+              <rect x="426" y="232" width="26" height="98" rx="5" class="mk-bar-accent"/>
+              <rect x="467" y="256" width="26" height="74" rx="5"/>
+            </g>
+            <path class="mk-line" d="M193 296 L234 280 L275 288 L316 258 L357 272 L398 242 L439 228 L480 252"/>
+            <!-- stock card -->
+            <rect x="528" y="176" width="170" height="176" rx="14" class="mk-card"/>
+            <rect x="548" y="196" width="70" height="10" rx="5" class="mk-bar-1"/>
+            <g class="mk-rows">
+              <rect x="548" y="222" width="130" height="8" rx="4" class="mk-bar-2"/>
+              <rect x="548" y="238" width="96" height="6" rx="3" class="mk-track"/>
+              <rect x="548" y="238" width="72" height="6" rx="3" class="mk-fill"/>
+              <rect x="548" y="266" width="112" height="8" rx="4" class="mk-bar-2"/>
+              <rect x="548" y="282" width="130" height="6" rx="3" class="mk-track"/>
+              <rect x="548" y="282" width="38" height="6" rx="3" class="mk-fill mk-fill--low"/>
+              <rect x="548" y="310" width="122" height="8" rx="4" class="mk-bar-2"/>
+              <rect x="548" y="326" width="130" height="6" rx="3" class="mk-track"/>
+              <rect x="548" y="326" width="104" height="6" rx="3" class="mk-fill"/>
+            </g>
+            <!-- table -->
+            <rect x="156" y="368" width="542" height="86" rx="14" class="mk-card"/>
+            <rect x="176" y="386" width="96" height="8" rx="4" class="mk-bar-1"/>
+            <g class="mk-bar-2">
+              <rect x="176" y="410" width="150" height="7" rx="3.5"/>
+              <rect x="352" y="410" width="90" height="7" rx="3.5"/>
+              <rect x="470" y="410" width="70" height="7" rx="3.5"/>
+              <rect x="176" y="432" width="126" height="7" rx="3.5"/>
+              <rect x="352" y="432" width="104" height="7" rx="3.5"/>
+              <rect x="470" y="432" width="58" height="7" rx="3.5"/>
+            </g>
+            <rect x="600" y="404" width="76" height="18" rx="9" class="mk-chip-ok"/>
+            <rect x="600" y="426" width="76" height="18" rx="9" class="mk-chip-warn"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="floatcard floatcard--a" aria-hidden="true">
+        <span class="msym" aria-hidden="true">receipt_long</span>
+        <div>
+          <strong data-i18n="float.invoice">Invoice GRV/25-26/0142</strong>
+          <small data-i18n="float.paid">Paid · ₹1,24,500</small>
+        </div>
+      </div>
+      <div class="floatcard floatcard--b" aria-hidden="true">
+        <span class="msym msym--warn" aria-hidden="true">warning</span>
+        <div>
+          <strong data-i18n="float.lowstock">Low stock: MS Casting Flange</strong>
+          <small data-i18n="float.lowstockSub">12 pcs left · reorder now</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--
+    NOTE FOR SITE OWNER: the counters below are launch placeholders.
+    Replace them with your real, verifiable numbers before going live.
+  -->
+  <div class="shell">
+    <ul class="stats reveal">
+      <li><span class="stat__num" data-count="500" data-suffix="+">0</span><span class="stat__label" data-i18n="stat.invoices">Invoices Generated</span></li>
+      <li><span class="stat__num" data-prefix="₹" data-count="2" data-suffix="Cr+">0</span><span class="stat__label" data-i18n="stat.txn">Transactions Tracked</span></li>
+      <li><span class="stat__num" data-count="19" data-suffix="+">0</span><span class="stat__label" data-i18n="stat.features">Business Features</span></li>
+      <li><span class="stat__num" data-count="100" data-suffix="%">0</span><span class="stat__label" data-i18n="stat.gst">GST Ready</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ C. PROBLEM vs SOLUTION ============ -->
+<section class="section" id="problem">
+  <div class="shell">
+    <header class="sechead reveal">
+      <span class="eyebrow" data-i18n="eyebrow.problem">The daily chaos</span>
+      <h2 data-i18n="problem.h2">Notebooks and Excel were never built to run a factory</h2>
+      <p data-i18n="problem.sub">If any of this sounds like your week, you already know the cost. Grevity fixes it on day one.</p>
+    </header>
+
+    <div class="grid grid--4 compare">
+      <article class="card compare__card reveal" data-delay="1">
+        <div class="compare__bad">
+          <span class="msym" aria-hidden="true">close</span>
+          <h3 data-i18n="cmp1.badT">Bills written by hand</h3>
+          <p data-i18n="cmp1.badP">Wrong GST, repeated invoice numbers, no copy when the party asks again.</p>
+        </div>
+        <div class="compare__good">
+          <span class="msym" aria-hidden="true">check_circle</span>
+          <h3 data-i18n="cmp1.goodT">GST invoice in 30 seconds</h3>
+          <p data-i18n="cmp1.goodP">Auto numbering with your prefix and financial year, correct tax, instant PDF.</p>
+        </div>
+      </article>
+
+      <article class="card compare__card reveal" data-delay="2">
+        <div class="compare__bad">
+          <span class="msym" aria-hidden="true">close</span>
+          <h3 data-i18n="cmp2.badT">Stock only in your head</h3>
+          <p data-i18n="cmp2.badP">Godown counting every month, orders accepted for material you don’t have.</p>
+        </div>
+        <div class="compare__good">
+          <span class="msym" aria-hidden="true">check_circle</span>
+          <h3 data-i18n="cmp2.goodT">Live stock, every item</h3>
+          <p data-i18n="cmp2.goodP">Products and sub-products with HSN, real-time quantity and low-stock alerts.</p>
+        </div>
+      </article>
+
+      <article class="card compare__card reveal" data-delay="3">
+        <div class="compare__bad">
+          <span class="msym" aria-hidden="true">close</span>
+          <h3 data-i18n="cmp3.badT">Guessing production cost</h3>
+          <p data-i18n="cmp3.badP">No idea what a finished piece really costs after material, so rates are guesswork.</p>
+        </div>
+        <div class="compare__good">
+          <span class="msym" aria-hidden="true">check_circle</span>
+          <h3 data-i18n="cmp3.goodT">BOM-based costing</h3>
+          <p data-i18n="cmp3.goodP">Define components once, log production, and see exact cost per finished product.</p>
+        </div>
+      </article>
+
+      <article class="card compare__card reveal" data-delay="4">
+        <div class="compare__bad">
+          <span class="msym" aria-hidden="true">close</span>
+          <h3 data-i18n="cmp4.badT">“Kitna baaki hai?”</h3>
+          <p data-i18n="cmp4.badP">Party balances scattered across diaries, WhatsApp chats and memory.</p>
+        </div>
+        <div class="compare__good">
+          <span class="msym" aria-hidden="true">check_circle</span>
+          <h3 data-i18n="cmp4.goodT">Ledgers that always agree</h3>
+          <p data-i18n="cmp4.goodP">Running balance per customer and supplier, with full payment history and outstanding reports.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ D. CORE FEATURES ============ -->
+<section class="section section--tint" id="features">
+  <div class="shell">
+    <header class="sechead reveal">
+      <span class="eyebrow" data-i18n="eyebrow.features">Everything inside</span>
+      <h2 data-i18n="features.h2">One pendrive. Your whole business.</h2>
+      <p data-i18n="features.sub">Nineteen features that replace a shelf full of registers — and three different softwares.</p>
+    </header>
+
+    <div class="chips reveal" role="tablist" aria-label="Filter features">
+      <button class="chip is-active" role="tab" aria-selected="true" data-filter="all" data-i18n="filter.all">All</button>
+      <button class="chip" role="tab" aria-selected="false" data-filter="billing" data-i18n="filter.billing">Billing &amp; Documents</button>
+      <button class="chip" role="tab" aria-selected="false" data-filter="stock" data-i18n="filter.stock">Inventory &amp; Production</button>
+      <button class="chip" role="tab" aria-selected="false" data-filter="money" data-i18n="filter.money">Money &amp; Parties</button>
+      <button class="chip" role="tab" aria-selected="false" data-filter="reports" data-i18n="filter.reports">Reports</button>
+      <button class="chip" role="tab" aria-selected="false" data-filter="platform" data-i18n="filter.platform">Platform</button>
+    </div>
+
+    <div class="grid grid--3 features" id="featureGrid">
+
+      <article class="card feature reveal" data-cat="billing">
+        <span class="feature__icon msym" aria-hidden="true">receipt_long</span>
+        <h3 data-i18n="f1.t">Sales &amp; Purchase Invoicing</h3>
+        <p data-i18n="f1.d">GST-ready sales and purchase bills with automatic invoice numbering, custom prefixes and financial-year sequencing.</p>
+      </article>
+
+      <article class="card feature reveal" data-cat="billing">
+        <span class="feature__icon msym" aria-hidden="true">description</span>
+        <h3 data-i18n="f2.t">Document Workflow Stages</h3>
+        <p data-i18n="f2.d">Move a document through Draft → Quotation → Order → Invoice without re-typing anything.</p>
+      </article>
+
+      <article class="card feature reveal" data-cat="stock">
+        <span class="feature__icon msym" aria-hidden="true">inventory_2</span>
+        <h3 data-i18n="f3.t">Product &amp; Sub-Product Management</h3>
+        <p data-i18n="f3.d">HSN codes, pricing, live stock quantity and low-stock alerts — for products and their variants.</p>
+      </article>
+
+      <article class="card feature reveal" data-cat="stock">
+        <span class="feature__icon msym" aria-hidden="true">precision_manufacturing</span>
+        <h3 data-i18n="f4.t">Bill of Materials &amp; Production</h3>
+        <p data-i18n="f4.d">Component-based products, production entries that consume raw material, and a clear cost breakdown per piece.</p>
+      </article>
+
+      <article class="card feature reveal" data-cat="money">
+        <span class="feature__icon msym" aria-hidden="true">account_balance_wallet</span>
+        <h3 data-i18n="f5.t">Customer &amp; Supplier Ledgers</h3>
+        <p data-i18n="f5.d">Running balance for every party with the full transaction history behind it.</p>
+      </article>
+
+      <article class="card feature reveal" data-cat="money">
+        <span class="feature__icon msym" aria-hidden="true">payments</span>
+        <h3 data-i18n="f6.t">Payment Tracking</h3>
+        <p data-i18n="f6.d">Record received and paid amounts, see live payment status and party balances at a glance.</p>
+      </article>
+
+      <article class="card feature reveal" data-cat="platform">
+        <span class="feature__icon msym" aria-hidden="true">storefront</span>
+        <h3 data-i18n="f7.t">Multi-Company Management</h3>
+        <p data-i18n="f7.d">Run all your businesses from one login and switch between them in a click.</p>
+      </article>
+
+      <article class="card feature reveal" data-cat="money">
+        <span class="feature__icon msym" aria-hidden="true">savings</span>
+        <h3 data-i18n="f8.t">Capital &amp; Owner Withdrawals</h3>
+        <p data-i18n="f8.d">Per-financial-year capital accounts that keep owner introductions and withdrawals clean.</p>
+      </article>
+
+      <article class="card feature reveal" data-cat="money">
+        <span class="feature__icon msym" aria-hidden="true">request_quote</span>
+        <h3 data-i18n="f9.t">Expense Tracking</h3>
+        <p data-i18n="f9.d">Single or bulk expense entry, neatly categorised so month-end never surprises you.</p>
+      </article>
+
+      <article class="card feature reveal" data-cat="reports">
+        <span class="feature__icon msym" aria-hidden="true">trending_up</span>
+        <h3 data-i18n="f10.t">Reports &amp; Analytics Dashboard</h3>
+        <p data-i18n="f10.d">Sales, purchase and profit trends across 7-day, 30-day, 90-day and year-to-date views.</p>
+      </article>
+
+      <article class="card feature reveal" data-cat="reports">
+        <span class="feature__icon msym" aria-hidden="true">stacked_bar_chart</span>
+        <h3 data-i18n="f11.t">Detailed Business Reports</h3>
+        <p data-i18n="f11.d">Sales, purchase, consolidated, outstanding and unpaid reports — ready for your CA.</p>
+      </article>
+
+      <article class="card feature reveal" data-cat="reports">
+        <span class="feature__icon msym" aria-hidden="true">table_view</span>
+        <h3 data-i18n="f12.t">One-Click Excel Export</h3>
+        <p data-i18n="f12.d">Send any list or report straight to Excel when your accountant asks for it.</p>
+      </article>
+
+      <article class="card feature reveal" data-cat="billing">
+        <span class="feature__icon msym" aria-hidden="true">picture_as_pdf</span>
+        <h3 data-i18n="f13.t">PDF Invoice Generation</h3>
+        <p data-i18n="f13.d">Clean, branded PDF invoices ready to print or send on WhatsApp instantly.</p>
+      </article>
+
+      <article class="card feature reveal" data-cat="reports">
+        <span class="feature__icon msym" aria-hidden="true">manage_search</span>
+        <h3 data-i18n="f14.t">Powerful Global Search</h3>
+        <p data-i18n="f14.d">Find anything by product, customer, supplier or HSN code from one search box.</p>
+      </article>
+
+      <article class="card feature reveal" data-cat="platform">
+        <span class="feature__icon msym" aria-hidden="true">history</span>
+        <h3 data-i18n="f15.t">Audit Logs</h3>
+        <p data-i18n="f15.d">A full change history, so you always know who edited what and when.</p>
+      </article>
+
+      <article class="card feature reveal" data-cat="platform">
+        <span class="feature__icon msym" aria-hidden="true">backup</span>
+        <h3 data-i18n="f16.t">Data Backup &amp; Restore</h3>
+        <p data-i18n="f16.d">One-click backup and one-click restore. Your years of data, never at risk.</p>
+      </article>
+
+      <article class="card feature reveal" data-cat="platform">
+        <span class="feature__icon msym" aria-hidden="true">lock</span>
+        <h3 data-i18n="f17.t">Secure Login &amp; Access Control</h3>
+        <p data-i18n="f17.d">Give staff exactly the access they need — and nothing more.</p>
+      </article>
+
+      <article class="card feature feature--hero reveal" data-cat="platform">
+        <span class="feature__icon msym" aria-hidden="true">usb</span>
+        <h3 data-i18n="f18.t">Works Offline — USB Pendrive Edition</h3>
+        <p data-i18n="f18.d">Runs entirely from a USB drive with its own local database. No internet, no server, hardware-locked licensing. Plug in and bill.</p>
+        <span class="tag" data-i18n="tag.unique">Nobody else in Rajkot does this</span>
+      </article>
+
+      <article class="card feature reveal" data-cat="platform">
+        <span class="feature__icon msym" aria-hidden="true">settings_suggest</span>
+        <h3 data-i18n="f20.t">Business Settings &amp; Branding</h3>
+        <p data-i18n="f20.d">Your logo, your invoice numbering, your financial year — configured the way you work.</p>
+      </article>
+
+    </div>
+
+    <p class="features__empty" id="featuresEmpty" hidden data-i18n="features.empty">No features in this category.</p>
+  </div>
+</section>
+
+<!-- ============ E. WHY RAJKOT / WHY GUJARAT ============ -->
+<section class="section" id="local">
+  <div class="shell local">
+    <div class="local__copy reveal">
+      <span class="eyebrow" data-i18n="eyebrow.local">Local first</span>
+      <h2 data-i18n="local.h2">Built in Rajkot, for Rajkot</h2>
+      <p data-i18n="local.p1">
+        Grevity did not start in a boardroom. It started with casting units, forging shops, engineering works,
+        auto-parts traders and textile businesses around Rajkot telling us the same thing: the software available
+        was either too heavy, too costly, or built for somebody else’s business.
+      </p>
+      <p data-i18n="local.p2">
+        So we built for how work actually happens here — job-work realities, BOM-based production, party ledgers,
+        and support in Gujarati on the phone when you need it. Rajkot first, then all of Gujarat, then India.
+      </p>
+      <ul class="ticks">
+        <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="local.t1">Support in Gujarati, Hindi and English</span></li>
+        <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="local.t2">On-site setup and training in Rajkot</span></li>
+        <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="local.t3">Built around casting, forging and engineering workflows</span></li>
+        <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="local.t4">Priced for small and medium businesses, not enterprises</span></li>
+      </ul>
+      <a class="btn btn--primary" href="#demo">
+        <span data-i18n="cta.demoLocal">Book a free demo in Rajkot</span>
+        <span class="msym" aria-hidden="true">arrow_forward</span>
+      </a>
+    </div>
+
+    <div class="local__map reveal" data-delay="2">
+      <svg viewBox="0 0 440 380" role="img" aria-labelledby="mapTitle" class="gjmap">
+        <title id="mapTitle">Map of Gujarat with Rajkot marked, alongside Ahmedabad, Surat and Jamnagar</title>
+        <g class="gjmap__grid" aria-hidden="true">
+          <path d="M0 95h440M0 190h440M0 285h440M110 0v380M220 0v380M330 0v380"/>
+        </g>
+        <!-- Gujarat state boundary from Natural Earth 1:10m admin-1 (public domain),
+             simplified to 301 points and projected to this viewBox. -->
+        <path class="gjmap__shape" d="M200.0 48.4 L205.7 44.5 L198.7 40.6 L197.2 32.0 L204.0 24.2 L215.0 28.3 L236.5 24.6 L242.6 26.8 L251.0 25.4 L254.9 28.3 L257.2 24.8 L262.4 26.7 L270.2 23.1 L278.3 28.5 L288.6 27.9 L283.3 31.4 L294.3 36.5 L297.2 43.1 L303.0 37.4 L311.2 40.9 L314.5 46.0 L326.5 48.1 L330.3 46.4 L333.0 38.8 L339.4 37.6 L339.8 45.0 L347.8 47.5 L340.5 53.1 L338.5 58.7 L340.1 62.6 L349.7 73.0 L356.9 66.6 L361.6 78.4 L357.8 81.3 L357.2 89.4 L366.8 95.6 L366.9 102.7 L371.0 100.4 L374.3 102.8 L375.1 114.5 L380.7 116.2 L386.8 114.5 L392.3 121.7 L397.2 120.3 L405.5 126.6 L408.0 133.9 L413.6 133.7 L420.4 141.1 L424.2 155.1 L430.0 157.6 L423.9 172.6 L418.1 174.2 L409.2 181.7 L402.1 181.4 L401.6 183.6 L406.4 188.1 L416.3 190.4 L413.0 194.2 L405.6 193.0 L403.9 195.0 L404.3 203.3 L409.3 213.0 L408.5 221.6 L387.2 229.9 L386.8 236.9 L389.2 241.0 L383.4 246.1 L388.0 253.5 L409.7 249.0 L412.7 250.8 L418.9 248.9 L419.9 252.1 L407.1 257.6 L402.7 256.9 L397.3 261.7 L394.5 269.1 L387.2 269.5 L384.4 275.4 L379.7 278.3 L370.2 276.0 L375.5 281.5 L380.3 281.6 L391.1 291.9 L393.9 306.3 L387.3 313.4 L386.1 318.5 L379.9 321.6 L375.3 321.5 L363.1 310.3 L357.6 315.1 L363.9 323.4 L357.4 335.5 L359.6 342.7 L358.5 349.1 L350.8 348.4 L346.2 354.1 L343.6 349.3 L336.9 351.9 L335.8 346.9 L341.5 342.1 L338.3 341.1 L337.7 337.8 L326.2 344.0 L329.8 353.0 L313.9 356.9 L318.8 336.8 L325.5 333.9 L323.2 328.4 L325.8 323.9 L326.6 309.4 L329.8 307.4 L328.0 303.0 L325.7 304.0 L326.7 299.6 L322.5 301.9 L324.3 297.5 L322.5 295.2 L325.9 291.4 L322.2 292.1 L318.2 288.4 L323.3 286.7 L320.7 280.8 L316.2 281.2 L313.4 284.7 L314.3 278.3 L311.8 279.1 L311.4 282.9 L307.7 282.5 L315.7 275.8 L309.8 270.4 L307.9 271.9 L305.8 265.6 L309.8 264.0 L304.4 262.3 L316.5 257.5 L315.9 255.4 L305.6 260.1 L308.0 255.0 L321.6 243.8 L326.0 244.0 L342.1 235.6 L328.5 240.8 L303.4 242.1 L301.9 240.1 L304.5 229.0 L307.9 223.5 L312.7 222.5 L315.7 218.5 L302.9 224.5 L300.2 219.8 L305.1 204.1 L309.0 203.0 L316.6 206.3 L320.8 201.3 L327.7 202.1 L327.1 197.9 L317.1 200.6 L305.0 197.4 L297.8 201.4 L297.6 199.1 L292.8 199.9 L293.2 191.7 L288.6 199.3 L285.1 199.4 L282.8 196.4 L276.7 198.1 L279.5 200.0 L282.8 197.4 L282.7 200.9 L287.2 201.6 L287.2 212.4 L278.3 219.9 L273.2 217.6 L275.3 219.3 L271.9 219.6 L273.6 222.1 L268.7 222.5 L277.2 223.5 L278.0 229.5 L270.6 225.4 L273.7 229.9 L267.0 228.4 L266.5 232.6 L268.2 234.4 L277.8 233.0 L286.7 245.0 L281.4 258.1 L273.7 267.4 L273.7 275.4 L251.0 287.8 L239.0 293.1 L236.9 292.0 L231.0 298.4 L209.5 307.0 L199.0 309.0 L198.4 311.0 L182.9 310.4 L156.0 295.4 L137.2 279.1 L120.9 256.6 L95.5 233.9 L93.1 227.0 L89.4 228.0 L80.2 219.6 L63.3 196.9 L65.9 187.9 L71.9 183.4 L70.2 187.0 L71.8 189.4 L80.5 188.2 L78.3 194.5 L81.1 198.4 L99.0 193.5 L102.0 189.9 L101.4 185.8 L103.5 185.6 L104.0 190.9 L108.0 192.5 L113.6 189.0 L115.9 183.6 L120.0 188.0 L131.8 179.1 L145.5 177.7 L158.6 153.1 L167.2 147.6 L168.8 142.7 L167.1 138.6 L164.7 136.8 L160.2 141.1 L159.7 150.4 L153.8 150.6 L149.1 146.1 L148.4 149.1 L144.5 149.8 L142.3 146.5 L140.9 149.1 L142.6 151.2 L122.5 156.3 L114.7 164.3 L106.0 163.3 L80.5 156.8 L58.1 144.7 L44.0 134.8 L40.4 129.9 L41.9 126.8 L37.2 127.4 L37.8 123.4 L40.9 122.7 L35.1 119.5 L36.2 115.8 L32.1 117.0 L31.4 114.0 L28.7 114.0 L32.8 109.1 L29.6 106.6 L30.2 109.9 L27.9 110.5 L27.7 101.4 L33.2 101.6 L31.7 98.6 L36.0 97.2 L45.1 87.4 L55.2 82.9 L42.6 86.1 L40.3 89.8 L28.9 94.7 L22.2 103.9 L10.0 102.0 L18.8 98.2 L14.4 96.0 L13.6 90.3 L11.4 91.6 L12.7 85.4 L17.8 81.6 L18.0 78.7 L20.5 80.6 L23.3 76.4 L24.0 78.5 L48.7 76.6 L50.2 50.3 L53.7 50.4 L56.3 57.1 L60.7 51.0 L65.7 55.7 L71.5 53.3 L78.1 55.9 L85.7 53.7 L104.5 54.2 L111.7 60.5 L118.2 62.4 L134.7 61.6 L140.9 52.2 L168.3 43.5 L171.1 43.6 L170.9 53.4 L175.0 56.7 L185.3 57.1 L190.3 55.0 L189.6 52.1 L194.7 48.1 L200.0 48.4 Z"/>
+
+        <g class="pin" transform="translate(187.0,196.2)">
+          <circle class="pin__pulse" r="10"/>
+          <circle class="pin__pulse pin__pulse--2" r="10"/>
+          <circle class="pin__core" r="9"/>
+          <circle class="pin__dot" r="3.4"/>
+        </g>
+        <text x="205" y="194" class="gjmap__label">Rajkot</text>
+        <text x="205" y="212" class="gjmap__sub" data-i18n="map.live">Live now</text>
+
+        <g class="pin pin--soft" transform="translate(304.8,144.5)"><circle class="pin__core" r="5.5"/></g>
+        <text x="317" y="149" class="gjmap__sub">Ahmedabad</text>
+        <g class="pin pin--soft" transform="translate(322.1,277.9)"><circle class="pin__core" r="5.5"/></g>
+        <text x="334" y="282" class="gjmap__sub">Surat</text>
+        <g class="pin pin--soft" transform="translate(137.4,184.2)"><circle class="pin__core" r="5.5"/></g>
+        <text x="126" y="188" class="gjmap__sub" text-anchor="end">Jamnagar</text>
+      </svg>
+      <p class="local__next" data-i18n="local.next">Expanding across Gujarat, then India →</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ F. HOW IT WORKS ============ -->
+<section class="section section--tint" id="how">
+  <div class="shell">
+    <header class="sechead reveal">
+      <span class="eyebrow" data-i18n="eyebrow.how">Up and running fast</span>
+      <h2 data-i18n="how.h2">From demo to your first invoice — same day</h2>
+      <p data-i18n="how.sub">No consultants. No month-long implementation. Four steps, and you are billing.</p>
+    </header>
+
+    <ol class="steps">
+      <li class="step reveal" data-delay="1">
+        <span class="step__num">1</span>
+        <h3 data-i18n="s1.t">Sign up</h3>
+        <p data-i18n="s1.d">Book a free demo. Pay for your first year and we hand over your licensed Grevity pendrive — no account, no server, nothing to install on a network.</p>
+      </li>
+      <li class="step reveal" data-delay="2">
+        <span class="step__num">2</span>
+        <h3 data-i18n="s2.t">Set up your company</h3>
+        <p data-i18n="s2.d">Add your GSTIN, logo, invoice prefix and financial year. We do this with you, in Gujarati if you prefer.</p>
+      </li>
+      <li class="step reveal" data-delay="3">
+        <span class="step__num">3</span>
+        <h3 data-i18n="s3.t">Add products &amp; parties</h3>
+        <p data-i18n="s3.d">Import your item list, HSN codes, customers and suppliers — opening balances included.</p>
+      </li>
+      <li class="step reveal" data-delay="4">
+        <span class="step__num">4</span>
+        <h3 data-i18n="s4.t">Start billing</h3>
+        <p data-i18n="s4.d">Raise your first GST invoice, watch stock update itself, and send the PDF on WhatsApp.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ G. PRICING ============ -->
+<section class="section" id="pricing">
+  <div class="shell">
+    <header class="sechead reveal">
+      <span class="eyebrow" data-i18n="eyebrow.pricing">Simple pricing</span>
+      <h2 data-i18n="pricing.h2">One yearly price. Nothing hidden.</h2>
+      <p data-i18n="pricing.sub">₹7,000 for your first year — licensed pendrive, setup, data import, training and support included. After that it is ₹5,000 a year, and that renewal is the only bill you will ever get from us.</p>
+    </header>
+
+    <!--
+      NOTE FOR SITE OWNER: prices are set in TWO places each — the data-price /
+      data-renew attributes and the visible text beside them. Change both.
+    -->
+    <div class="plans plans--single">
+      <article class="card plan plan--featured plan--single reveal">
+        <span class="plan__badge" data-i18n="pricing.bestRajkot">Best for Rajkot businesses</span>
+        <h3 class="plan__name" data-i18n="plan.name">Grevity Pendrive Edition</h3>
+        <p class="plan__for" data-i18n="plan.for">Your whole business, fully offline, on your own USB drive</p>
+        <p class="plan__price">
+          <span class="plan__amt" data-price="7000">₹7,000</span>
+          <span class="plan__per" data-i18n="pricing.firstYear">first year</span>
+        </p>
+        <p class="plan__renew">
+          <span data-i18n="pricing.then">then</span>
+          <strong data-renew="5000">₹5,000</strong>
+          <span data-i18n="pricing.perYear">per year</span>
+        </p>
+        <p class="plan__note" data-i18n="pricing.gstNote">+ GST · no monthly fee, no per-invoice charge</p>
+        <a class="btn btn--primary btn--block btn--lg plan__cta" href="#demo">
+          <span data-i18n="cta.demoFree">Book a Free Demo</span>
+          <span class="msym" aria-hidden="true">arrow_forward</span>
+        </a>
+
+        <ul class="ticks ticks--sm">
+          <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="plan.f1">Runs fully offline from a USB drive</span></li>
+          <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="plan.f2">Own local database — data stays with you</span></li>
+          <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="plan.f3">GST sales &amp; purchase invoicing</span></li>
+          <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="plan.f4">Quotation → Order → Invoice workflow</span></li>
+          <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="plan.f5">Products, stock &amp; low-stock alerts</span></li>
+          <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="plan.f6">BOM &amp; production cost tracking</span></li>
+          <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="plan.f7">Customer &amp; supplier ledgers</span></li>
+          <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="plan.f8">Expenses, capital &amp; withdrawals</span></li>
+          <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="plan.f9">All reports, analytics &amp; Excel export</span></li>
+          <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="plan.f10">PDF invoices with your branding</span></li>
+          <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="plan.f11">Multi-company management &amp; audit logs</span></li>
+          <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="plan.f12">One-click backup, restore &amp; hardware-locked licence</span></li>
+        </ul>
+
+        <p class="plan__fine" data-i18n="plan.fine">Your yearly renewal keeps updates, support and your licence running — nothing else is charged on top. Need it on more computers or for more firms? Tell us during the demo.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ H. TESTIMONIALS ============ -->
+<!--
+  NOTE FOR SITE OWNER: these are PLACEHOLDER testimonials with fictional
+  names, included so you can see the layout. Replace every one with a real,
+  consented customer quote before publishing — do not launch with these.
+-->
+<section class="section section--tint" id="voices">
+  <div class="shell">
+    <header class="sechead reveal">
+      <span class="eyebrow" data-i18n="eyebrow.voices">From the ground</span>
+      <h2 data-i18n="voices.h2">What Rajkot businesses say</h2>
+      <p data-i18n="voices.sub">Sample quotes shown while we collect our first customer stories.</p>
+    </header>
+  </div>
+
+  <div class="marquee reveal" id="marquee" aria-label="Customer testimonials">
+    <div class="marquee__track" id="marqueeTrack">
+      <figure class="card quote">
+        <div class="stars" aria-label="5 out of 5">★★★★★</div>
+        <blockquote data-i18n="q1.t">“Earlier my munim spent two days on month-end. Now the outstanding report is ready before I finish my tea.”</blockquote>
+        <figcaption><span class="ava">JP</span><span><strong>Jayesh Patel</strong><small data-i18n="q1.r">CNC &amp; auto parts · Aji GIDC, Rajkot</small></span></figcaption>
+      </figure>
+      <figure class="card quote">
+        <div class="stars" aria-label="5 out of 5">★★★★★</div>
+        <blockquote data-i18n="q2.t">“Everything on one pendrive sold me. My data never leaves my factory, and there is no internet problem at the shop floor.”</blockquote>
+        <figcaption><span class="ava">HV</span><span><strong>Hardik Vora</strong><small data-i18n="q2.r">Casting unit · Shapar-Veraval</small></span></figcaption>
+      </figure>
+      <figure class="card quote">
+        <div class="stars" aria-label="5 out of 5">★★★★★</div>
+        <blockquote data-i18n="q3.t">“BOM costing finally told me what a finished piece really costs. I corrected my rates in the first week.”</blockquote>
+        <figcaption><span class="ava">NK</span><span><strong>Nilesh Kotecha</strong><small data-i18n="q3.r">Forging works · Metoda GIDC</small></span></figcaption>
+      </figure>
+      <figure class="card quote">
+        <div class="stars" aria-label="4 out of 5">★★★★<span class="star--off">★</span></div>
+        <blockquote data-i18n="q4.t">“Support talks to me in Gujarati and understands job-work. That matters more than any feature list.”</blockquote>
+        <figcaption><span class="ava">BS</span><span><strong>Bhavna Shah</strong><small data-i18n="q4.r">Textile trading · Rajkot</small></span></figcaption>
+      </figure>
+      <figure class="card quote">
+        <div class="stars" aria-label="5 out of 5">★★★★★</div>
+        <blockquote data-i18n="q5.t">“Three firms, one login. Switching companies used to mean three different Excel files.”</blockquote>
+        <figcaption><span class="ava">AD</span><span><strong>Ashok Dhameliya</strong><small data-i18n="q5.r">Engineering &amp; trading · Gondal Road</small></span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ I. FAQ ============ -->
+<section class="section" id="faq">
+  <div class="shell shell--narrow">
+    <header class="sechead reveal">
+      <span class="eyebrow" data-i18n="eyebrow.faq">Straight answers</span>
+      <h2 data-i18n="faq.h2">Questions we get every week</h2>
+    </header>
+
+    <div class="acc">
+      <details class="acc__item reveal">
+        <summary><span data-i18n="faq.q1">Is my business data safe?</span><span class="msym acc__chev" aria-hidden="true">expand_more</span></summary>
+        <div class="acc__body"><p data-i18n="faq.a1">Safer than most software, because nothing ever leaves your premises. Your entire database sits on your own USB pendrive — it is never uploaded to any server and we cannot see it. Access is protected by secure login and role-based control, every change is recorded in audit logs, and one-click backup and restore let you keep copies wherever you want them.</p></div>
+      </details>
+      <details class="acc__item reveal">
+        <summary><span data-i18n="faq.q2">Do I need internet to use it?</span><span class="msym acc__chev" aria-hidden="true">expand_more</span></summary>
+        <div class="acc__body"><p data-i18n="faq.a2">Never. Grevity is offline software only — it runs from the USB pendrive with its own local database on any Windows computer. No connection, no server, no login to a website. Power cuts and network problems on the shop floor stop being your problem.</p></div>
+      </details>
+      <details class="acc__item reveal">
+        <summary><span data-i18n="faq.q3">Are the invoices GST compliant?</span><span class="msym acc__chev" aria-hidden="true">expand_more</span></summary>
+        <div class="acc__body"><p data-i18n="faq.a3">Grevity generates GST invoices with HSN codes, correct tax breakups, your own invoice prefix and financial-year-wise numbering, exported as clean PDFs. Your reports and Excel exports are formatted so your CA can work with them directly.</p></div>
+      </details>
+      <details class="acc__item reveal">
+        <summary><span data-i18n="faq.q4">Can I run more than one firm?</span><span class="msym acc__chev" aria-hidden="true">expand_more</span></summary>
+        <div class="acc__body"><p data-i18n="faq.a4">Yes. Multi-company management lets you switch between businesses from one login, each with its own products, parties, invoice numbering, capital accounts and reports.</p></div>
+      </details>
+      <details class="acc__item reveal">
+        <summary><span data-i18n="faq.q5">Do you support Gujarati and Hindi?</span><span class="msym acc__chev" aria-hidden="true">expand_more</span></summary>
+        <div class="acc__body"><p data-i18n="faq.a5">Our team supports you in Gujarati, Hindi and English on phone and WhatsApp, and this website is fully available in Gujarati. Ask about interface language options during your demo.</p></div>
+      </details>
+      <details class="acc__item reveal">
+        <summary><span data-i18n="faq.q6">I already have data in Excel or Tally. Can I move it?</span><span class="msym acc__chev" aria-hidden="true">expand_more</span></summary>
+        <div class="acc__body"><p data-i18n="faq.a6">Yes. We help you import your item master, HSN codes, customers, suppliers and opening balances during setup, so you start with your real numbers instead of a blank screen.</p></div>
+      </details>
+      <details class="acc__item reveal">
+        <summary><span data-i18n="faq.q7">How long does setup take?</span><span class="msym acc__chev" aria-hidden="true">expand_more</span></summary>
+        <div class="acc__body"><p data-i18n="faq.a7">Most Rajkot businesses raise their first invoice on the same day. If your item list is large, we finish the import within two working days — with on-site help wherever we can reach.</p></div>
+      </details>
+      <details class="acc__item reveal">
+        <summary><span data-i18n="faq.q8">Is there an AMC or hidden charge?</span><span class="msym acc__chev" aria-hidden="true">expand_more</span></summary>
+        <div class="acc__body"><p data-i18n="faq.a8">Nothing hidden. Grevity is ₹7,000 for the first year — pendrive, setup, data import, training and support included — and ₹5,000 a year after that. That yearly renewal is the only recurring charge and it covers your licence, all updates and support. No monthly fee, no per-invoice charge, no separate AMC on top. GST applies as per law.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ J. FINAL CTA / CONTACT ============ -->
+<section class="section cta" id="demo">
+  <div class="shell cta__inner">
+    <div class="cta__copy reveal">
+      <span class="eyebrow eyebrow--on" data-i18n="eyebrow.demo">Free demo</span>
+      <h2 data-i18n="demo.h2">See Grevity on your own business data</h2>
+      <p data-i18n="demo.sub">A 20-minute walkthrough on your invoices, your items, your parties. No pressure, no cost — and we speak Gujarati.</p>
+      <ul class="ticks ticks--on">
+        <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="demo.t1">Free demo, on-site or online</span></li>
+        <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="demo.t2">Setup and data import help included</span></li>
+        <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="demo.t3">Talk to a real person, not a chatbot</span></li>
+      </ul>
+      <div class="cta__direct">
+        <a class="btn btn--wa" id="waCtaBtn" href="#" target="_blank" rel="noopener">
+          <span class="msym" aria-hidden="true">chat</span><span data-i18n="cta.whatsapp">Chat on WhatsApp</span>
+        </a>
+        <a class="btn btn--ghost btn--on" id="callCtaBtn" href="tel:+919876543210">
+          <span class="msym" aria-hidden="true">call</span><span class="js-phone">+91 98765 43210</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="cta__form reveal" data-delay="2">
+      <form class="form card" id="demoForm" novalidate>
+        <h3 data-i18n="form.h3">Request your free demo</h3>
+        <div class="field">
+          <label for="fName" data-i18n="form.name">Your name</label>
+          <input id="fName" name="name" type="text" autocomplete="name" required data-i18n-placeholder="form.namePh" placeholder="Jayesh Patel">
+          <span class="err" data-err-for="fName"></span>
+        </div>
+        <div class="field">
+          <label for="fBiz" data-i18n="form.biz">Business name</label>
+          <input id="fBiz" name="business" type="text" autocomplete="organization" required data-i18n-placeholder="form.bizPh" placeholder="Shreeji Engineering Works">
+          <span class="err" data-err-for="fBiz"></span>
+        </div>
+        <div class="field">
+          <label for="fCity" data-i18n="form.city">City</label>
+          <input id="fCity" name="city" type="text" autocomplete="address-level2" required list="cityList" data-i18n-placeholder="form.cityPh" placeholder="Rajkot">
+          <datalist id="cityList">
+            <option value="Rajkot"></option><option value="Ahmedabad"></option><option value="Jamnagar"></option>
+            <option value="Morbi"></option><option value="Surat"></option><option value="Vadodara"></option>
+            <option value="Bhavnagar"></option><option value="Junagadh"></option><option value="Gandhidham"></option>
+          </datalist>
+          <span class="err" data-err-for="fCity"></span>
+        </div>
+        <div class="field">
+          <label for="fPhone" data-i18n="form.phone">Phone / WhatsApp</label>
+          <div class="field__phone">
+            <span class="field__prefix">+91</span>
+            <input id="fPhone" name="phone" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel-national" required placeholder="98765 43210">
+          </div>
+          <span class="err" data-err-for="fPhone"></span>
+        </div>
+        <div class="field">
+          <label for="fType" data-i18n="form.type">Business type</label>
+          <select id="fType" name="type">
+            <option value="manufacturer" data-i18n="form.typeM">Manufacturer</option>
+            <option value="trader" data-i18n="form.typeT">Trader / Wholesaler</option>
+            <option value="retailer" data-i18n="form.typeR">Retailer</option>
+            <option value="other" data-i18n="form.typeO">Other</option>
+          </select>
+        </div>
+        <button class="btn btn--primary btn--block btn--lg" type="submit" id="formSubmit">
+          <span data-i18n="form.submit">Book my free demo</span>
+          <span class="msym" aria-hidden="true">arrow_forward</span>
+        </button>
+        <p class="form__fine" data-i18n="form.fine">We call within one working day. Your details stay with us — never sold, never spammed.</p>
+        <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ K. FOOTER ============ -->
+<footer class="footer">
+  <div class="shell footer__grid">
+    <div class="footer__brand">
+      <a class="brand" href="#hero" aria-label="Grevity — home">
+        <img class="brand__mark" src="/assets/img/logo-mark.svg" alt="" width="36" height="36" loading="lazy">
+        <span class="brand__name">Grevity</span>
+      </a>
+      <p data-i18n="footer.blurb">Billing, inventory and production software for India’s small and medium manufacturers, traders and retailers.</p>
+      <p class="footer__made"><span class="msym" aria-hidden="true">location_on</span><span data-i18n="footer.made">Made in Gujarat, India</span></p>
+    </div>
+
+    <nav class="footer__col" aria-label="Product">
+      <h4 data-i18n="footer.product">Product</h4>
+      <a href="#features" data-i18n="nav.features">Features</a>
+      <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+    </nav>
+
+    <nav class="footer__col" aria-label="Company">
+      <h4 data-i18n="footer.company">Company</h4>
+      <a href="#local" data-i18n="footer.about">Why Rajkot</a>
+      <a href="#voices" data-i18n="footer.stories">Customer stories</a>
+      <a href="#demo" data-i18n="cta.demo">Get Free Demo</a>
+    </nav>
+
+    <div class="footer__col">
+      <h4 data-i18n="footer.contact">Contact</h4>
+      <!-- NOTE FOR SITE OWNER: replace address, phone and email with your real details. -->
+      <address>
+        <span data-i18n="footer.addr">Grevity Software<br>150 Feet Ring Road, Rajkot<br>Gujarat 360005, India</span>
+      </address>
+      <a class="js-phone-link" href="tel:+919876543210"><span class="msym" aria-hidden="true">call</span><span class="js-phone">+91 98765 43210</span></a>
+      <a href="mailto:hello@grevity.in"><span class="msym" aria-hidden="true">description</span>hello@grevity.in</a>
+    </div>
+  </div>
+
+  <div class="shell footer__bottom">
+    <p>© <span id="year">2026</span> Grevity. <span data-i18n="footer.rights">All rights reserved.</span></p>
+    <p class="footer__legal">
+      <a href="#" data-i18n="footer.privacy">Privacy</a><span aria-hidden="true">·</span>
+      <a href="#" data-i18n="footer.terms">Terms</a><span aria-hidden="true">·</span>
+      <a href="#" data-i18n="footer.refund">Refund policy</a>
+    </p>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a class="fab-wa" id="waFab" href="#" target="_blank" rel="noopener" aria-label="Chat with Grevity on WhatsApp">
+  <span class="msym" aria-hidden="true">chat</span>
+  <span class="fab-wa__text" data-i18n="cta.waShort">WhatsApp</span>
+</a>
+
+<!-- Sticky mobile CTA -->
+<div class="mobar" id="mobar">
+  <a class="mobar__btn" id="mobarCall" href="tel:+919876543210">
+    <span class="msym" aria-hidden="true">call</span><span data-i18n="cta.call">Call</span>
+  </a>
+  <a class="mobar__btn mobar__btn--wa" id="mobarWa" href="#" target="_blank" rel="noopener">
+    <span class="msym" aria-hidden="true">chat</span><span data-i18n="cta.waShort">WhatsApp</span>
+  </a>
+  <a class="mobar__btn mobar__btn--primary" href="#demo">
+    <span data-i18n="cta.demoShort">Free Demo</span>
+  </a>
+</div>
+
+<script src="/assets/js/i18n-gu.js" defer></script>
+<script src="/assets/js/main.js" defer></script>
+</body>
+</html>
