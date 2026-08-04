@@ -1,7 +1,7 @@
 {
   "name": "Grevity — Billing, Stock & Production",
   "short_name": "Grevity",
-  "description": "GST billing, inventory and production software for manufacturers, traders and retailers in India.",
+  "description": "Tax billing, inventory and production software for manufacturers, traders and retailers in India.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

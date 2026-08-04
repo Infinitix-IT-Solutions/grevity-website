@@ -119,7 +119,7 @@ the FAQ, the pricing or the structured data — keep it that way when editing.
 ## SEO
 
 Meta description and keywords target *billing software Rajkot*, *inventory
-management software Gujarat*, *GST billing software for manufacturers*. Includes
+management software Gujarat*, *tax billing software for manufacturers*. Includes
 Open Graph + Twitter cards (`assets/img/og-image.png`, 1200×630), canonical URL,
 `sitemap.xml`, `robots.txt`, and JSON-LD for `SoftwareApplication`,
 `LocalBusiness` (Rajkot) and `FAQPage`.
