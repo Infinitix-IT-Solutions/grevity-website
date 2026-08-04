@@ -12,7 +12,7 @@
 <link rel="canonical" href="https://grevity.in/">
 
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0b1220" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -39,8 +39,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap">
 <!--
   Material Symbols, subset to only the icons this page uses.
   IMPORTANT: icon_names MUST stay alphabetically sorted and every name must
@@ -61,10 +61,10 @@
       var q = new URLSearchParams(location.search);
       var t = q.get('theme') || localStorage.getItem('grevity-theme');
       if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      d.setAttribute('data-theme', t);
+      if (t === 'dark') d.classList.add('dark');
       var l = q.get('lang') || localStorage.getItem('grevity-lang') || 'en';
       if (l === 'gu') { d.setAttribute('data-lang', 'gu'); d.setAttribute('lang', 'gu'); }
-    } catch (e) { d.setAttribute('data-theme', 'light'); }
+    } catch (e) {}
   })();
 </script>
 

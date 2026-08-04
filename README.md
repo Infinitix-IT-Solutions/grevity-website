@@ -104,6 +104,31 @@ The whole site positions Grevity as **offline-only software on a USB pendrive,
 sold once**. There is no cloud edition and no subscription anywhere in the copy,
 the FAQ, the pricing or the structured data — keep it that way when editing.
 
+## Brand palette
+
+Colours come from the Grevity product palette and live as CSS custom properties
+at the top of `assets/css/style.css` — change them there, not in individual
+rules.
+
+- **Brand:** indigo ramp `--brand-50` … `--brand-900`. Primary CTAs are
+  `#4f46e5` with `#4338ca` on hover, everywhere: hero, mid-page, footer and the
+  sticky mobile bar.
+- **Neutrals:** slate. Light `#ffffff` surfaces on `#f8fafc` sections; dark
+  `#131a2d` surfaces on `#0b1020`.
+- **Accents** (`--teal`, `--sky`, `--violet`, `--warn`, `--ok`, `--danger`) are
+  for icons, tags and status only — never a primary button. Feature cards are
+  colour-coded by category the way the app tints its modules: Billing & Money
+  indigo, Inventory/Production teal, Reports sky, Platform/Security violet.
+- **One deliberate exception:** the WhatsApp buttons keep WhatsApp's own green
+  (`--wa: #25D366`). Recognition matters more there than palette purity.
+
+Dark mode is toggled by adding `dark` to `<html>` (same convention as the app),
+persisted in `localStorage`, with `?theme=dark` for linking straight to it.
+
+**Type:** Inter for headings and body, JetBrains Mono for figures — stat
+counters, prices and the invoice/amount details. Gujarati swaps in Noto Sans
+Gujarati automatically.
+
 ## Accessibility & performance notes
 
 - All animation is `transform`/`opacity` only, and fully disabled under

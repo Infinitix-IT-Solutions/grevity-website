@@ -65,8 +65,8 @@
   document.head.appendChild(themeMeta);
 
   function applyTheme(next) {
-    root.setAttribute('data-theme', next);
-    themeMeta.content = next === 'dark' ? '#0b1220' : '#ffffff';
+    root.classList.toggle('dark', next === 'dark');
+    themeMeta.content = next === 'dark' ? '#0b1020' : '#ffffff';
     var tb = $('#themeToggle');
     if (tb) tb.setAttribute('aria-label', next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
     try { localStorage.setItem('grevity-theme', next); } catch (e) {}
@@ -449,7 +449,7 @@
   var themeToggle = $('#themeToggle');
   if (themeToggle) {
     themeToggle.addEventListener('click', function () {
-      applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+      applyTheme(root.classList.contains('dark') ? 'light' : 'dark');
     });
   }
   var langToggle = $('#langToggle');
@@ -489,7 +489,7 @@
   var yearEl = $('#year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  applyTheme(root.getAttribute('data-theme') || 'light');
+  applyTheme(root.classList.contains('dark') ? 'dark' : 'light');
   rotator.init();
   priceUI.init();
   if (lang === 'gu') applyLang('gu');
