@@ -41,10 +41,43 @@ var CONFIG = {
 };
 ```
 
-With `formEndpoint` empty, the demo form validates and then hands the enquiry to
-WhatsApp with all fields pre-filled, so no lead is lost. Set it to a Formspree
-form or your own webhook and it POSTs JSON instead (`name, business, city,
-phone, type, language, page, submittedAt`), falling back to WhatsApp on failure.
+**Getting demo enquiries by email** — the form posts to **Web3Forms**, which
+needs no backend. Three steps:
+
+1. Go to <https://web3forms.com>, enter the address you want enquiries sent to
+   (e.g. `hello@grevity.in`) and they email you an **access key**.
+2. Paste it into `formAccessKey` in the CONFIG block above.
+3. Submit the form once yourself to confirm the mail arrives (check spam on the
+   first one, then mark it "not spam").
+
+Free tier is 250 submissions/month. The email arrives with the enquirer's name,
+business, city, phone, business type, which language they read the site in, and
+a timestamp.
+
+**Until that key is filled in**, the form still works: it validates, then opens
+WhatsApp with every field pre-filled so the enquiry reaches you anyway. The same
+fallback fires if Web3Forms is ever down or rejects the key — a lead is never
+silently lost.
+
+**Spam protection** is two layers:
+
+1. A **honeypot** field, invisible to people. If it comes back filled, the
+   enquiry is dropped silently.
+2. **hCaptcha** ("I am human" tick box), via Web3Forms' shared sitekey — no
+   hCaptcha account needed. Loaded by `https://web3forms.com/client/script.js`,
+   rendered by `<div class="h-captcha" data-captcha="true">` in the form. The
+   token rides along as `h-captcha-response`, and the widget is reset after each
+   submit because a solved token is single-use.
+
+The widget follows the page theme (a one-line inline script sets `data-theme`
+before it renders) and is scaled down under 620px so it fits the card on phones.
+
+⚠️ **Check that captcha is enforced in your Web3Forms dashboard.** The tick box
+stops bots driving the visible form, but a script can still POST straight to the
+API. Only the server-side setting makes the token mandatory.
+
+To use a different provider instead, point `formEndpoint` at your own webhook
+and clear `formAccessKey`; the form POSTs the same JSON either way.
 
 **2. Hero counters** — `index.html`, the `.stats` list. `500+ invoices` and
 `₹2Cr+ transactions` are illustrative. Put your real, verifiable numbers there.

@@ -865,6 +865,17 @@
             <option value="other" data-i18n="form.typeO">Other</option>
           </select>
         </div>
+        <!-- Honeypot: invisible to people, irresistible to bots. Filled = discarded. -->
+        <div class="hp" aria-hidden="true">
+          <label for="fWebsite">Leave this field empty</label>
+          <input id="fWebsite" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <!-- hCaptcha via Web3Forms' shared sitekey. The inline script matches the
+             widget to the current theme before it renders. -->
+        <div class="h-captcha" data-captcha="true"></div>
+        <script>(function(){var d=document.currentScript.previousElementSibling;
+          if(document.documentElement.classList.contains('dark'))d.setAttribute('data-theme','dark');})();</script>
+
         <button class="btn btn--primary btn--block btn--lg" type="submit" id="formSubmit">
           <span data-i18n="form.submit">Book my free demo</span>
           <span class="msym" aria-hidden="true">arrow_forward</span>
@@ -908,7 +919,7 @@
       <h4 data-i18n="footer.contact">Contact</h4>
       <!-- NOTE FOR SITE OWNER: replace the email with your real one. -->
       <a class="js-phone-link" href="tel:+919426526594"><span class="msym" aria-hidden="true">call</span><span class="js-phone">+91 94265 26594</span></a>
-      <a href="mailto:hello@grevity.in"><span class="msym" aria-hidden="true">description</span>hello@grevity.in</a>
+      <a href="mailto:infinitixitsolutions@gmail.com"><span class="msym" aria-hidden="true">description</span>infinitixitsolutions@gmail.com</a>
     </div>
   </div>
 
@@ -941,6 +952,7 @@
   </a>
 </div>
 
+<script src="https://web3forms.com/client/script.js" async defer></script>
 <script src="/assets/js/i18n-gu.js" defer></script>
 <script src="/assets/js/main.js" defer></script>
 </body>

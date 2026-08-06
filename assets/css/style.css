@@ -734,6 +734,13 @@ button { font: inherit; color: inherit; }
   background: var(--surface-2); color: var(--muted); font-size: .9rem; font-weight: 600;
 }
 .field__phone input { border-radius: 0 var(--r-sm) var(--r-sm) 0; }
+/* hCaptcha widget is a fixed 303px iframe — keep it inside the card on phones. */
+.h-captcha { margin: 6px 0 14px; }
+.h-captcha iframe { border-radius: var(--r-sm); }
+
+/* Honeypot — off-canvas rather than display:none, which some bots skip. */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
 .err { display: block; min-height: 16px; margin-top: 4px; font-size: .76rem; color: var(--danger); }
 .form__fine { font-size: .76rem; color: var(--muted); margin: 12px 0 0; text-align: center; }
 .form__status { margin: 10px 0 0; font-size: .88rem; font-weight: 600; text-align: center; color: var(--text); }
@@ -886,6 +893,8 @@ button { font: inherit; color: inherit; }
 }
 
 @media (max-width: 620px) {
+  .form { padding: 20px; }
+  .h-captcha { transform: scale(.76); transform-origin: 0 0; height: 62px; }
   .grid--3, .grid--4 { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr; }
   .plan--single .ticks { grid-template-columns: 1fr; }

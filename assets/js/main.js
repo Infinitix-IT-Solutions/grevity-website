@@ -13,8 +13,14 @@
     phoneDisplay: '+91 94265 26594',      // shown on screen
     whatsapp:     '919426526594',         // wa.me number: country code + number, digits only
     waMessage:    'Hello Grevity! I would like a free demo of your billing and inventory software.',
-    formEndpoint: ''                      // e.g. 'https://formspree.io/f/xxxx' or your webhook.
-                                          // Leave '' to fall back to WhatsApp hand-off.
+
+    // Demo form -> your inbox, via Web3Forms (no backend needed).
+    // Get a free access key at https://web3forms.com by entering your email,
+    // paste it below, and enquiries start arriving. Until it is filled in, the
+    // form hands every enquiry to WhatsApp instead, so no lead is ever lost.
+    formAccessKey: 'be8952a8-8be5-4c3a-9909-9274afdc15fe',
+    formEndpoint:  'https://api.web3forms.com/submit',
+    formMailTo:    'infinitixitsolutions@gmail.com'     // shown in the enquiry, for your reference
   };
 
   var $  = function (s, c) { return (c || document).querySelector(s); };
@@ -389,7 +395,22 @@
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      var trap = $('#fWebsite');
+      if (trap && trap.value) { done_silently(); return; }   // honeypot: bots fill it, people cannot see it
+
       var ok = Object.keys(rules).every(function (id) { return validateField(id); });
+
+      // hCaptcha injects this textarea into the form once solved.
+      var capField = form.querySelector('textarea[name="h-captcha-response"]');
+      var capToken = capField ? capField.value : '';
+      var capWidget = form.querySelector('.h-captcha');
+      if (capWidget && !capToken) {
+        status.className = 'form__status bad';
+        status.textContent = t('err.captcha', 'Please tick the "I am human" box first.');
+        capWidget.scrollIntoView({ block: 'center', behavior: reduced ? 'auto' : 'smooth' });
+        return;
+      }
+
       if (!ok) {
         status.className = 'form__status bad';
         status.textContent = t('form.fix', 'Please check the highlighted fields.');
@@ -397,15 +418,16 @@
         return;
       }
 
+      // Field names double as the labels in the enquiry email, so keep them readable.
       var data = {
         name: $('#fName').value.trim(),
         business: $('#fBiz').value.trim(),
         city: $('#fCity').value.trim(),
         phone: '+91' + $('#fPhone').value.replace(/\D/g, ''),
-        type: $('#fType').value,
-        language: lang,
-        page: location.href,
-        submittedAt: new Date().toISOString()
+        business_type: $('#fType').options[$('#fType').selectedIndex].text,
+        page_language: lang === 'gu' ? 'Gujarati' : 'English',
+        submitted_at: new Date().toLocaleString('en-IN'),
+        page: location.href
       };
 
       submit.classList.add('is-busy');
@@ -413,30 +435,57 @@
       status.textContent = t('form.sending', 'Sending…');
 
       var summary = 'Name: ' + data.name + '\nBusiness: ' + data.business +
-                    '\nCity: ' + data.city + '\nPhone: ' + data.phone + '\nType: ' + data.type;
+                    '\nCity: ' + data.city + '\nPhone: ' + data.phone +
+                    '\nType: ' + data.business_type;
+
+      function done_silently() {
+        status.className = 'form__status ok';
+        status.textContent = t('form.thanks', 'Thank you! We will call you within one working day.');
+        form.reset();
+      }
+
+      function resetCaptcha() {
+        // A solved token is single-use; without this a second submit always fails.
+        if (window.hcaptcha && typeof window.hcaptcha.reset === 'function') {
+          try { window.hcaptcha.reset(); } catch (e) {}
+        }
+      }
 
       function done() {
+        resetCaptcha();
         submit.classList.remove('is-busy');
         status.className = 'form__status ok';
         status.textContent = t('form.thanks', 'Thank you! We will call you within one working day.');
         form.reset();
       }
 
-      if (!CONFIG.formEndpoint) {
-        // No backend configured: hand the enquiry over to WhatsApp so nothing is lost.
+      if (!CONFIG.formAccessKey || !CONFIG.formEndpoint) {
+        // No key yet: hand the enquiry to WhatsApp so nothing is lost.
         window.open(waLink(summary), '_blank', 'noopener');
         done();
         return;
       }
+
+      data.access_key = CONFIG.formAccessKey;
+      if (capToken) data['h-captcha-response'] = capToken;
+      data.subject = 'New Grevity Demo Request — ' + data.business + ', ' + data.city;
+      data.from_name = 'Grevity Website';
+      if (CONFIG.formMailTo) data.to_email = CONFIG.formMailTo;
 
       fetch(CONFIG.formEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(data)
       }).then(function (res) {
-        if (!res.ok) throw new Error('bad status ' + res.status);
-        done();
-      }).catch(function () {
+        return res.json().catch(function () { return {}; }).then(function (body) {
+          // Web3Forms answers 200 with {success:false} on a bad key, so check both.
+          if (!res.ok || body.success === false) throw new Error(body.message || 'status ' + res.status);
+          done();
+        });
+      }).catch(function (err) {
+        // Surface the reason: silent WhatsApp hand-offs are hard to debug otherwise.
+        if (window.console) console.warn('Grevity form: could not send —', err && err.message);
+        resetCaptcha();
         submit.classList.remove('is-busy');
         status.className = 'form__status bad';
         status.textContent = t('form.failed', 'Could not send. Please WhatsApp us instead — we are one tap away.');
