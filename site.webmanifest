@@ -8,6 +8,6 @@
   "theme_color": "#4f46e5",
   "lang": "en-IN",
   "icons": [
-    { "src": "/assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+    { "src": "/assets/img/grevity-icon-180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
   ]
 }

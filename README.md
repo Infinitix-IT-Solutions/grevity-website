@@ -11,7 +11,7 @@ index.html            all sections (A–K)
 assets/css/style.css  design system: tokens, light/dark, layout, animation
 assets/js/main.js     behaviour + CONFIG block (see below)
 assets/js/i18n-gu.js  Gujarati copy deck
-assets/img/           logo, favicon, OG image (SVG + PNG)
+assets/img/           logo (light + dark SVG), app icon, OG image
 sitemap.xml robots.txt site.webmanifest
 ```
 
@@ -84,6 +84,12 @@ commercial use), simplified to 301 points and projected into the SVG viewBox.
 City pins sit at their true coordinates. If you move or redraw the outline, the
 stroke-draw animation adapts by itself — `main.js` measures the path with
 `getTotalLength()` at runtime.
+
+**Logo files** — `grevity-logo-compact.svg` (indigo, for light surfaces) and
+`grevity-logo-compact-light.svg` (white, for dark) are both in the navbar and
+footer; CSS shows the right one for the active theme. `grevity-icon-180.png` is
+the favicon, Apple touch icon and PWA icon. The white logo is also inlined into
+`og-image.svg` — re-run the OG command below after changing it.
 
 **Icons** are Material Symbols Rounded, loaded as a subset in `<head>`. If you
 add an icon, add its name to the `icon_names=` list **in alphabetical order** —

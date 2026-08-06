@@ -311,10 +311,14 @@ button { font: inherit; color: inherit; }
 }
 .nav.is-stuck .nav__inner { height: 62px; }
 
-.brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text-strong); }
-.brand__mark { border-radius: 11px; transition: transform .35s var(--ease); }
-.brand:hover .brand__mark { transform: rotate(-8deg) scale(1.05); }
-.brand__name { font-family: var(--f-head); font-size: 1.3rem; font-weight: 800; letter-spacing: -.03em; }
+.brand { display: inline-flex; align-items: center; color: var(--text-strong); }
+/* Two files: indigo wordmark on light surfaces, white one on dark. */
+.brand__logo { display: block; height: 40px; width: auto; transition: transform .35s var(--ease); }
+.brand:hover .brand__logo { transform: scale(1.03); }
+.brand__logo--dark { display: none; }
+.dark .brand__logo--light { display: none; }
+.dark .brand__logo--dark { display: block; }
+.footer .brand__logo { height: 38px; }
 
 .nav__links { display: flex; gap: 4px; margin-left: auto; }
 .nav__links a {
@@ -894,7 +898,7 @@ button { font: inherit; color: inherit; }
 }
 
 @media (max-width: 380px) {
-  .brand__name { font-size: 1.15rem; }
+  .brand__logo { height: 32px; }
   .iconbtn__label { display: none; }
   .floatcard { display: none; }
 }
