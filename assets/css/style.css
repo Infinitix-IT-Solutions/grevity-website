@@ -848,6 +848,9 @@ button { font: inherit; color: inherit; }
   .nav__burger { display: inline-flex; }
   .nav__cta { display: none; }
   .nav__links { text-align: left; }
+  /* .nav__links is fixed here, so its auto margin no longer pushes anything —
+     the actions have to claim the free space themselves. */
+  .nav__actions { margin-left: auto; }
 
   .hero { padding-top: calc(var(--nav-h) + 34px); }
   .hero__inner { grid-template-columns: 1fr; }
