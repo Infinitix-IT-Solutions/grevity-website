@@ -11,8 +11,7 @@
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://grevity.in/">
 
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0b1020" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -59,8 +58,9 @@
     try {
       // ?theme=dark and ?lang=gu let you link straight to a variant.
       var q = new URLSearchParams(location.search);
-      var t = q.get('theme') || localStorage.getItem('grevity-theme');
-      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      // Light is the default on a first visit — the OS setting is deliberately
+      // ignored. A visitor who picks dark keeps it on later visits.
+      var t = q.get('theme') || localStorage.getItem('grevity-theme') || 'light';
       if (t === 'dark') d.classList.add('dark');
       var l = q.get('lang') || localStorage.getItem('grevity-lang') || 'en';
       if (l === 'gu') { d.setAttribute('data-lang', 'gu'); d.setAttribute('lang', 'gu'); }
