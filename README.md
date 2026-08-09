@@ -88,11 +88,18 @@ a real customer quote you have permission to publish, then delete the warning
 comment above the section. Do not launch with these as-is.
 
 **4. Price** — `index.html`, section `#pricing`. Grevity sells one thing: the
-offline Pendrive Edition at **₹7,000 for the first year, then ₹5,000 a year**.
-Each number lives in an attribute *and* in the visible text beside it — change
-both: `data-price="7000"` on `.plan__amt`, `data-renew="5000"` on the
-`.plan__renew strong`. The same two figures are also written into the section
-intro (`pricing.sub`) and FAQ answer 8, in English and Gujarati.
+offline Pendrive Edition, listed at **₹8,999** and sold at **₹4,999 for the
+first year, then ₹2,999 a year**. Each number lives in an attribute *and* in the
+visible text beside it — change both:
+
+- `data-mrp="8999"` on `.plan__mrp` (the struck-through list price)
+- `data-price="4999"` on `.plan__amt`
+- `data-renew="2999"` on the `.plan__renew strong`
+
+The discount line (`pricing.off`) is hand-written — recalculate "Save ₹4,000 ·
+44% off" yourself if you change the numbers. The figures also appear in the
+section intro (`pricing.sub`) and FAQ answer 8, in English and Gujarati, and in
+the two `Offer` entries in the JSON-LD.
 
 **5. Address, email, legal links** — footer in `index.html`, plus the
 `LocalBusiness` block in the JSON-LD in `<head>`. Privacy / Terms / Refund

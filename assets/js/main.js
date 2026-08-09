@@ -319,9 +319,12 @@
      Indian digit grouping from data-price / data-renew. */
   var priceUI = (function () {
     function render() {
-      $$('[data-price], [data-renew]').forEach(function (el) {
-        var v = el.getAttribute('data-price') || el.getAttribute('data-renew');
-        if (v) el.textContent = '₹' + Number(v).toLocaleString('en-IN');
+      $$('[data-price], [data-renew], [data-mrp]').forEach(function (el) {
+        var v = el.getAttribute('data-price') || el.getAttribute('data-renew') || el.getAttribute('data-mrp');
+        if (!v) return;
+        var label = el.querySelector('.sr-only');            // keep "Regular price" for screen readers
+        el.textContent = '₹' + Number(v).toLocaleString('en-IN');
+        if (label) el.insertBefore(label, el.firstChild);
       });
     }
     return { init: render, render: render };
