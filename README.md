@@ -45,7 +45,7 @@ var CONFIG = {
 needs no backend. Three steps:
 
 1. Go to <https://web3forms.com>, enter the address you want enquiries sent to
-   (e.g. `hello@grevity.in`) and they email you an **access key**.
+   (e.g. `hello@grevity.app`) and they email you an **access key**.
 2. Paste it into `formAccessKey` in the CONFIG block above.
 3. Submit the form once yourself to confirm the mail arrives (check spam on the
    first one, then mark it "not spam").
@@ -98,7 +98,7 @@ intro (`pricing.sub`) and FAQ answer 8, in English and Gujarati.
 `LocalBusiness` block in the JSON-LD in `<head>`. Privacy / Terms / Refund
 links are `#` — point them at real pages.
 
-**6. Domain** — the site assumes `https://grevity.in`. If it differs, update
+**6. Domain** — the site assumes `https://grevity.app`. If it differs, update
 `canonical`, the `og:`/`twitter:` URLs and JSON-LD in `index.html`, plus
 `sitemap.xml` and `robots.txt`.
 
