@@ -9,7 +9,7 @@
 <meta name="keywords" content="offline billing software pendrive, billing software Rajkot, inventory management software Gujarat, tax billing software for manufacturers, billing software without internet, invoicing software Rajkot, BOM production software India, stock management software Gujarat, one-time purchase billing software">
 <meta name="author" content="Grevity">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<link rel="canonical" href="https://grevity.app/">
+<link rel="canonical" href="https://www.grevity.app/">
 
 <meta name="theme-color" content="#ffffff">
 
@@ -18,10 +18,11 @@
 <meta property="og:site_name" content="Grevity">
 <meta property="og:locale" content="en_IN">
 <meta property="og:locale:alternate" content="gu_IN">
-<meta property="og:url" content="https://grevity.app/">
+<meta property="og:url" content="https://www.grevity.app/">
 <meta property="og:title" content="Grevity — Billing. Stock. Production. One Platform.">
 <meta property="og:description" content="Tax billing, live inventory, BOM production tracking and party ledgers — running fully offline from a USB pendrive. Built for Rajkot's manufacturers and traders.">
-<meta property="og:image" content="https://grevity.app/assets/img/og-image.png">
+<meta property="og:image" content="https://www.grevity.app/assets/img/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Grevity billing, stock and production software dashboard">
@@ -30,23 +31,22 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Grevity — Billing. Stock. Production. One Platform.">
 <meta name="twitter:description" content="Tax billing, live inventory, BOM production tracking and party ledgers — fully offline from a USB pendrive. Built for Rajkot's manufacturers and traders.">
-<meta name="twitter:image" content="https://grevity.app/assets/img/og-image.png">
+<meta name="twitter:image" content="https://www.grevity.app/assets/img/og-image.jpg">
 
 <link rel="icon" href="/assets/img/grevity-icon-180.png" sizes="180x180" type="image/png">
 <link rel="apple-touch-icon" href="/assets/img/grevity-icon-180.png">
 <link rel="manifest" href="/site.webmanifest">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+Gujarati:wght@400;500;600;700&display=swap">
 <!--
-  Material Symbols, subset to only the icons this page uses.
-  IMPORTANT: icon_names MUST stay alphabetically sorted and every name must
-  exist in Material Symbols Rounded — otherwise Google returns 400 and NO
-  icons load at all. Add new icons in the right alphabetical position.
+  Fonts are self-hosted (see @font-face at the top of style.css) — no request
+  to fonts.googleapis.com, so the browser skips a third-party DNS + TLS
+  handshake and the CSS-then-font waterfall. Each face is split by
+  unicode-range, so an English visitor never downloads the Gujarati face.
+  Only the two faces needed above the fold are preloaded; preloading the rest
+  would download bytes most visitors never render.
 -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=account_balance_wallet,arrow_forward,backup,call,chat,check_circle,close,dark_mode,description,expand_more,history,inventory_2,light_mode,lock,manage_search,menu,payments,picture_as_pdf,precision_manufacturing,receipt_long,request_quote,savings,settings_suggest,shield_lock,stacked_bar_chart,storefront,table_view,translate,trending_up,usb,verified,warning&display=block">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/material-symbols-rounded.woff2" crossorigin>
 
 <link rel="stylesheet" href="/assets/css/style.css">
 
@@ -73,13 +73,22 @@
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "WebSite",
+      "@id": "https://www.grevity.app/#website",
+      "name": "Grevity",
+      "url": "https://www.grevity.app/",
+      "inLanguage": ["en-IN", "gu-IN"],
+      "publisher": { "@id": "https://www.grevity.app/#organization" }
+    },
+    {
       "@type": "SoftwareApplication",
       "name": "Grevity",
+      "publisher": { "@id": "https://www.grevity.app/#organization" },
       "applicationCategory": "BusinessApplication",
       "applicationSubCategory": "Offline Billing, Invoicing and Inventory Management",
       "operatingSystem": "Windows",
       "description": "Offline tax billing, invoicing, inventory and BOM-based production management software for small and medium manufacturers, traders and retailers in India. Runs entirely from a USB pendrive with its own local database — no internet and no server required.",
-      "url": "https://grevity.app/",
+      "url": "https://www.grevity.app/",
       "inLanguage": ["en-IN", "gu-IN"],
       "featureList": "Runs fully offline from a USB pendrive, tax invoicing, HSN codes, live stock and low-stock alerts, bill of materials and production tracking, customer and supplier ledgers, payment tracking, multi-company management, business reports, Excel export, PDF invoices, audit logs, one-click backup and restore",
       "offers": [
@@ -109,17 +118,32 @@
       ]
     },
     {
-      "@type": "LocalBusiness",
+      "@type": ["Organization", "LocalBusiness"],
+      "@id": "https://www.grevity.app/#organization",
       "name": "Grevity",
-      "image": "https://grevity.app/assets/img/og-image.png",
-      "url": "https://grevity.app/",
+      "image": "https://www.grevity.app/assets/img/og-image.jpg",
+      "url": "https://www.grevity.app/",
       "telephone": "+91-94265-26594",
+      "email": "grevity.app@gmail.com",
       "priceRange": "₹₹",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.grevity.app/assets/img/grevity-icon-180.png",
+        "width": 180,
+        "height": 180
+      },
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Rajkot",
         "addressRegion": "Gujarat",
         "addressCountry": "IN"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+91-94265-26594",
+        "contactType": "sales",
+        "areaServed": "IN",
+        "availableLanguage": ["en", "gu", "hi"]
       },
       "areaServed": [
         { "@type": "City", "name": "Rajkot" },
@@ -204,9 +228,12 @@
         <span data-i18n="hero.badge">Now Live in Rajkot, Gujarat 🎉</span>
       </a>
 
+      <!-- The h1 is the page's strongest on-page signal, so it names what we
+           sell and where. The old brand line ("Billing. Stock. Production.
+           One Platform.") lives on in the OG/Twitter titles. -->
       <h1 class="hero__title reveal" data-delay="1">
-        <span data-i18n="hero.h1a">Billing. Stock. Production.</span>
-        <span class="grad" data-i18n="hero.h1b">One Platform.</span>
+        <span data-i18n="hero.h1a">Offline Billing, Stock &amp; Production Software</span>
+        <span class="grad" data-i18n="hero.h1b">Built for Rajkot</span>
       </h1>
 
       <p class="hero__rotator reveal" data-delay="2" aria-live="off">

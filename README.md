@@ -8,10 +8,11 @@ folder to any host (Vercel, Netlify, Hostinger, cPanel) and it works.
 
 ```
 index.html            all sections (A–K)
-assets/css/style.css  design system: tokens, light/dark, layout, animation
+assets/css/style.css  @font-face block, then design system: tokens, light/dark, layout, animation
 assets/js/main.js     behaviour + CONFIG block (see below)
 assets/js/i18n-gu.js  Gujarati copy deck
 assets/img/           logo (light + dark SVG), app icon, OG image
+assets/fonts/         self-hosted woff2 (see Fonts below)
 sitemap.xml robots.txt site.webmanifest
 ```
 
@@ -105,9 +106,17 @@ the two `Offer` entries in the JSON-LD.
 `LocalBusiness` block in the JSON-LD in `<head>`. Privacy / Terms / Refund
 links are `#` — point them at real pages.
 
-**6. Domain** — the site assumes `https://grevity.app`. If it differs, update
-`canonical`, the `og:`/`twitter:` URLs and JSON-LD in `index.html`, plus
-`sitemap.xml` and `robots.txt`.
+**6. Domain** — the site assumes **`https://www.grevity.app`** (with `www`).
+That is not a style choice: the host currently answers `https://grevity.app/`
+with a `308` to the `www` host, so `www` is the real canonical. Every absolute
+URL — `canonical`, `og:`/`twitter:`, the JSON-LD `@id`s and `url`s,
+`sitemap.xml` and `robots.txt` — must name the host that serves a `200`, or you
+are declaring a canonical that redirects.
+
+If you would rather run on the bare apex, flip the primary domain in your host's
+dashboard **first** (so `www` → apex instead), confirm the redirect direction
+with `curl -I https://www.grevity.app/`, then rewrite the URLs to match. Change
+one without the other and canonical, sitemap and server disagree.
 
 ---
 
@@ -131,11 +140,58 @@ footer; CSS shows the right one for the active theme. `grevity-icon-180.png` is
 the favicon, Apple touch icon and PWA icon. The white logo is also inlined into
 `og-image.svg` — re-run the OG command below after changing it.
 
-**Icons** are Material Symbols Rounded, loaded as a subset in `<head>`. If you
-add an icon, add its name to the `icon_names=` list **in alphabetical order** —
-Google returns HTTP 400 for an out-of-order or misspelled name and then *no*
-icons load. (There is a JS guard that hides icon names rather than printing them
-if that happens, but fix the list.)
+## Fonts
+
+Fonts are **self-hosted** in `assets/fonts/` — the page makes no request to
+`fonts.googleapis.com`. That removes a third-party DNS + TLS handshake and the
+CSS-then-font waterfall, both of which hurt LCP.
+
+All three text families are **variable** woff2 (one file per unicode-range
+instead of one per weight), and each `@font-face` at the top of `style.css`
+carries its `unicode-range`. So the browser only downloads what it renders:
+
+| Visitor | Downloads | Total |
+|---|---|---|
+| English | `inter-latin`, `jetbrains-mono-latin`, `material-symbols-rounded` | ~84 KB |
+| Gujarati | the above + the three `noto-gujarati-*` faces | ~241 KB |
+
+An English visitor never touches the 110 KB Gujarati face. Only `inter-latin`
+and the icon font are `<link rel="preload">`ed in `<head>` — preloading the
+rest would pull bytes most visitors never render.
+
+**Weight ranges** are Inter `400–800`, JetBrains Mono `500–700`, Noto Sans
+Gujarati `400–700`. Gujarati has no 800, so headings clamp to 700 in `gu` —
+same as before, Google served the same range.
+
+`₹` (U+20B9) exists **only** in the Noto Sans Gujarati `gujarati` subset, not in
+Inter or JetBrains Mono. In English mode Noto is not in the font stack, so the
+rupee sign renders from a system font. That has always been true; just don't be
+surprised by it when comparing prices across the two languages.
+
+**To re-download** (after changing weights, or to pick up an upstream release),
+fetch each family's `css2` URL with a modern browser User-Agent — Google serves
+woff2 only to UAs it recognises — then save each `unicode-range` block's woff2
+under the matching name in `assets/fonts/` and update the `src`/`unicode-range`
+in `style.css`. Families used:
+
+```
+Inter:wght@400..800
+JetBrains+Mono:wght@500..700
+Noto+Sans+Gujarati:wght@400..700
+```
+
+**Icons** are Material Symbols Rounded, subset to only the icons this page uses.
+The subset woff2 (6 KB) is committed to `assets/fonts/`. To add an icon you must
+re-fetch the subset from Google with the icon added to the `icon_names=` list
+**in alphabetical order** — an out-of-order or misspelled name returns HTTP 400
+and you get *no* font at all. The generating URL is:
+
+```
+https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=account_balance_wallet,arrow_forward,backup,call,chat,check_circle,close,dark_mode,description,expand_more,history,inventory_2,light_mode,lock,manage_search,menu,payments,picture_as_pdf,precision_manufacturing,receipt_long,request_quote,savings,settings_suggest,shield_lock,stacked_bar_chart,storefront,table_view,translate,trending_up,usb,verified,warning&display=block
+```
+
+(There is a JS guard that hides icon names rather than printing them if the font
+fails to load, but fix the list.)
 
 ## What's in the page
 
@@ -189,16 +245,57 @@ Gujarati automatically.
 
 ## SEO
 
-Meta description and keywords target *billing software Rajkot*, *inventory
-management software Gujarat*, *tax billing software for manufacturers*. Includes
-Open Graph + Twitter cards (`assets/img/og-image.png`, 1200×630), canonical URL,
-`sitemap.xml`, `robots.txt`, and JSON-LD for `SoftwareApplication`,
-`LocalBusiness` (Rajkot) and `FAQPage`.
+Meta description targets *billing software Rajkot*, *inventory management
+software Gujarat*, *tax billing software for manufacturers*. Includes Open Graph
++ Twitter cards (`assets/img/og-image.jpg`, 1200×630), canonical URL,
+`sitemap.xml`, `robots.txt`, and a JSON-LD `@graph` with `WebSite`,
+`SoftwareApplication`, a combined `Organization`+`LocalBusiness` node (Rajkot)
+and `FAQPage`.
 
-To regenerate the OG PNG after editing `og-image.svg`:
+The `Organization` and `LocalBusiness` types share **one** node under
+`@id: #organization` rather than sitting in two — two nodes both named "Grevity"
+at the same URL reads as two competing entities. `WebSite` and
+`SoftwareApplication` both point at that `@id` as their publisher.
+
+`meta keywords` is still in `<head>`; Google has ignored it since 2009. Harmless,
+not worth maintaining.
+
+`FAQPage` is kept for machine-readability, but note that since August 2023 Google
+only renders FAQ **rich results** for government and health sites — don't expect
+the accordions to show in the SERP.
+
+### Known gaps
+
+- **Gujarati is invisible to search.** The language switch is a JS toggle on the
+  same URL, so crawlers only ever see the English DOM. `sitemap.xml` used to
+  declare `en-IN`/`gu-IN`/`x-default` all pointing at `/`, which is invalid, so
+  Google discarded the whole annotation — it has been removed. To actually rank
+  in Gujarati, serve it from `/gu/` as real HTML and add `hreflang` pairs to the
+  `<head>` of both pages *and* the sitemap.
+- **One page, nine target keywords.** `#features` and `#pricing` are anchors, not
+  URLs; Google ranks pages. Splitting into per-keyword landing pages is what
+  raises the ceiling here.
+- **Testimonials in `#voices` are fictional.** Do **not** add `Review` or
+  `AggregateRating` schema until they are real — fake review markup earns a
+  manual penalty.
+- **Privacy / Terms / Refund are `href="#"`.** Trust signals, and you collect
+  form data, so you need at minimum a privacy policy.
+- **`grevity.in` is a different company.** Despite the rename in this repo's git
+  history, that domain is live and serves an unrelated circular-economy business
+  ("Building Circular Value From the Ground Up"). So there is nothing to redirect
+  and no Change of Address to file — but there *is* a brand collision: searches
+  for "Grevity" alone will surface both. Rank for **"Grevity billing software"**
+  and **"Grevity Rajkot"** rather than the bare brand name, and get the Google
+  Business Profile up so the local pack disambiguates you.
+
+To regenerate the OG image after editing `og-image.svg` — render to PNG, then
+compress to JPEG (the PNG is ~370 KB, the JPEG ~92 KB with no visible artifacts;
+JPEG is chosen over WebP because LinkedIn and some WhatsApp clients still won't
+render WebP link previews):
 
 ```bash
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
   --headless=new --disable-gpu --window-size=1200,630 \
-  --screenshot=assets/img/og-image.png assets/img/og-image.svg
+  --screenshot=/tmp/og.png assets/img/og-image.svg
+sips -s format jpeg -s formatOptions 82 /tmp/og.png --out assets/img/og-image.jpg
 ```

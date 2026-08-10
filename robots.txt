@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://grevity.app/sitemap.xml
+Sitemap: https://www.grevity.app/sitemap.xml

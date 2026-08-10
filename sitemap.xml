@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<!--
+  hreflang is deliberately absent. It was previously declared here with
+  en-IN, gu-IN and x-default all pointing at https://www.grevity.app/ — three
+  languages on one URL is invalid, so Google discarded the whole annotation.
+
+  Gujarati is currently a JavaScript toggle on this same URL (localStorage +
+  data-lang), which means crawlers only ever see the English DOM. Restore the
+  hreflang pairs once Gujarati is served from its own URL (/gu/), and add the
+  matching <link rel="alternate" hreflang> tags to the <head> of both pages.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://grevity.app/</loc>
-    <lastmod>2026-08-09</lastmod>
+    <loc>https://www.grevity.app/</loc>
+    <lastmod>2026-08-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en-IN" href="https://grevity.app/"/>
-    <xhtml:link rel="alternate" hreflang="gu-IN" href="https://grevity.app/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://grevity.app/"/>
   </url>
 </urlset>
