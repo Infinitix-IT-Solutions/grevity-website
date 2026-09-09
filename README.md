@@ -80,30 +80,66 @@ API. Only the server-side setting makes the token mandatory.
 To use a different provider instead, point `formEndpoint` at your own webhook
 and clear `formAccessKey`; the form POSTs the same JSON either way.
 
-**2. Hero counters** — `index.html`, the `.stats` list. `500+ invoices` and
-`₹2Cr+ transactions` are illustrative. Put your real, verifiable numbers there.
+**2. Stat counters — removed, deliberately.** A hero strip used to claim `500+
+invoices generated` and `₹2Cr+ transactions tracked`. Those were placeholders,
+and publishing usage figures before the first sale misleads buyers, so the strip
+is gone. The animation engine in `main.js` is still there and still generic, so
+bringing it back once you have real totals is markup-only — add a list inside the
+`#hero` section:
+
+```html
+<div class="shell">
+  <ul class="stats reveal">
+    <li><span class="stat__num" data-count="500" data-suffix="+">0</span>
+        <span class="stat__label">Invoices Generated</span></li>
+  </ul>
+</div>
+```
+
+`data-count` is the target number, with optional `data-prefix` (e.g. `₹`) and
+`data-suffix` (`+`, `Cr+`, `%`). It counts up once, when scrolled into view, and
+renders the final value immediately under `prefers-reduced-motion`. You will
+also need to restore the `.stats` / `.stat__num` / `.stat__label` rules, which
+were deleted from `style.css` along with the markup. **Only put back numbers you
+can actually evidence.**
 
 **3. Testimonials** — `index.html`, section `#voices`. All five quotes and names
 are **fictional placeholders** so you can see the layout. Replace every one with
 a real customer quote you have permission to publish, then delete the warning
 comment above the section. Do not launch with these as-is.
 
-**4. Price** — `index.html`, section `#pricing`. Grevity sells one thing: the
-offline Pendrive Edition, listed at **₹8,999** and sold at **₹4,999 for the
-first year, then ₹2,999 a year**. Each number lives in an attribute *and* in the
-visible text beside it — change both:
+**4. Price and the launch offer** — `index.html`, section `#pricing`. Grevity
+sells one thing: the offline Pendrive Edition, listed at **₹8,999** and sold at
+**₹3,999 for the first year as a launch offer, then ₹2,999 a year**. Each number
+lives in an attribute *and* in the visible text beside it — change both:
 
 - `data-mrp="8999"` on `.plan__mrp` (the struck-through list price)
-- `data-price="4999"` on `.plan__amt`
+- `data-price="3999"` on `.plan__amt`
 - `data-renew="2999"` on the `.plan__renew strong`
 
-The discount line (`pricing.off`) is hand-written — recalculate "Save ₹4,000 ·
-44% off" yourself if you change the numbers. The figures also appear in the
-section intro (`pricing.sub`) and FAQ answer 8, in English and Gujarati, and in
-the two `Offer` entries in the JSON-LD.
+The discount line (`pricing.off`) is hand-written — recalculate "Save ₹5,000 ·
+56% off" yourself if you change the numbers. The figures also appear in the hero
+badge (`hero.badge`), the section intro (`pricing.sub`), the urgency line
+(`pricing.urgent`) and FAQ answer 8, in English and Gujarati, and in the two
+`Offer` entries in the JSON-LD. **Nine places in total — grep for `3999` and
+`3,999` after any change.**
+
+*When the launch period ends*, the honest sequence is: set `data-price` and the
+visible amount to the real price, drop `.plan__badge--offer` back to a plain
+`.plan__badge`, delete the `.plan__urgent` line, and reword `hero.badge`,
+`eyebrow.pricing`, `pricing.sub` and `faq.a8` so nothing still says "launch".
+The copy currently promises the price returns to ₹8,999 — honour that, or don't
+promise it.
+
+**A deliberate omission: there is no countdown timer and no "only N left".**
+Scarcity you do not actually enforce is a dark pattern, and under India's
+Consumer Protection Act 2019 a false urgency claim is a misleading advertisement.
+The copy says "while the launch offer lasts" precisely because that is true
+without naming a deadline. If you set a real cut-off — a date, or the first N
+customers — put it in `pricing.urgent` and then actually hold the line on it.
 
 **5. Address, email, legal links** — footer in `index.html`, plus the
-`LocalBusiness` block in the JSON-LD in `<head>`. Privacy / Terms / Refund
+`Organization` block in the JSON-LD in `<head>`. Privacy / Terms / Refund
 links are `#` — point them at real pages.
 
 **6. Domain** — the site assumes **`https://www.grevity.app`** (with `www`).
@@ -127,12 +163,49 @@ one without the other and canonical, sitemap and server disagree.
 or edit English in the HTML, then add the matching key to the Gujarati file — a
 missing key simply falls back to English, it never breaks the page.
 
-**The Gujarat map** in the "Why Rajkot" section is a real state boundary, not a
-drawing: Natural Earth 1:10m admin-1 data (**public domain**, free for
-commercial use), simplified to 301 points and projected into the SVG viewBox.
-City pins sit at their true coordinates. If you move or redraw the outline, the
-stroke-draw animation adapts by itself — `main.js` measures the path with
-`getTotalLength()` at runtime.
+**The site is national, not city-specific.** It used to lead with Rajkot and a
+Gujarat map; both are gone. Positioning is now *built in Gujarat, running across
+India* — the `#reach` section carries the local credibility (Gujarati/Hindi/
+English support, the trades we build for) without tying the product to one
+city. If you add copy, keep it that way: no city in the `<h1>`, the meta
+description, the pricing badge or the testimonials.
+
+## The 3D layer
+
+`assets/js/scene.js` builds the pendrive **procedurally in three.js** — no model
+file, no textures, no HDR environment. The wordmark decal, the contact shadow
+and the reflection environment are all drawn to `<canvas>` at runtime, so the
+whole 3D layer costs exactly one dependency and nothing else.
+
+three.js r160 is loaded as an ES module from cdnjs (`<link rel="preconnect">` in
+`<head>` warms the connection). Modules defer by default, so it never delays
+first paint.
+
+Two stages, both marked up with `data-stage` on a `.stage` element:
+
+| `data-stage` | Where | Behaviour |
+|---|---|---|
+| `hero` | hero right column | slow float, idle auto-spin, drag or arrow keys to turn |
+| `anatomy` | `#drive` section | cap and connector separate as the section scrolls, with HTML hotspot pills projected onto the model each frame |
+
+**It is progressive enhancement, and the fallback is not a blank box.** Every
+stage contains a working CSS-3D pendrive (`.fallback3d`). `scene.js` bails out
+entirely — leaving that drive visible — under `prefers-reduced-motion`, on
+`navigator.connection.saveData`, with no WebGL, or if the CDN import fails. The
+CSS drive only fades out once the first WebGL frame has actually rendered, which
+is what adds `.is-live` to the stage.
+
+Both stages pause when scrolled out of view (`IntersectionObserver`) and when the
+tab is hidden. The theme toggle in `main.js` fires a `grevity:theme` event;
+`scene.js` listens and rebuilds the environment map and shell colours, because
+the scene is lit for one ground or the other.
+
+Two gotchas if you move things around: the `.stage` element must have a real
+height (the renderer sizes itself from `host.clientHeight`, and an auto-height
+parent collapses the canvas to its 150px intrinsic default — that is why
+`.drive__stage .stage { height: 100% }` exists), and the hotspot anchors in
+`buildDrive()` deliberately sit *clear* of the model, since a pill laid over the
+drive hides the thing it is labelling.
 
 **Logo files** — `grevity-logo-compact.svg` (indigo, for light surfaces) and
 `grevity-logo-compact-light.svg` (white, for dark) are both in the navbar and
@@ -187,20 +260,22 @@ re-fetch the subset from Google with the icon added to the `icon_names=` list
 and you get *no* font at all. The generating URL is:
 
 ```
-https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=account_balance_wallet,arrow_forward,backup,call,chat,check_circle,close,dark_mode,description,expand_more,history,inventory_2,light_mode,lock,manage_search,menu,payments,picture_as_pdf,precision_manufacturing,receipt_long,request_quote,savings,settings_suggest,shield_lock,stacked_bar_chart,storefront,table_view,translate,trending_up,usb,verified,warning&display=block
+https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=account_balance_wallet,arrow_forward,backup,bolt,call,chat,check_circle,close,credit_card_off,dark_mode,description,dns,drag_pan,expand_more,history,inventory_2,key,light_mode,lock,manage_search,menu,payments,picture_as_pdf,precision_manufacturing,receipt_long,request_quote,savings,settings_suggest,shield_lock,stacked_bar_chart,storefront,table_view,translate,trending_up,usb,verified,wifi_off&display=block
 ```
 
 (There is a JS guard that hides icon names rather than printing them if the font
-fails to load, but fix the list.)
+fails to load, but fix the list. An icon that is *not* in the subset renders as
+its literal ligature name — "wifi_off" — which is how you will notice.)
 
 ## What's in the page
 
-Sticky nav with scroll progress · hero with animated dashboard, rotating
-audience text and stat counters · problem-vs-solution cards · 19 feature cards
-with category filter · Why Rajkot with animated map · 4-step timeline · single
-one-time price · testimonial marquee · FAQ accordion · demo form · footer. Plus
-floating WhatsApp button, sticky mobile call/WhatsApp bar, light/dark mode,
-English/Gujarati toggle.
+Glass nav with scroll progress · hero with the 3D pendrive and rotating audience
+text · offline-promise ticker · problem-vs-solution cards ·
+**the pendrive section** with the exploding 3D drive and projected hotspots ·
+19 features in a filterable bento grid · 4-step timeline · single one-time
+price · languages/trades reach band · testimonial marquee · FAQ accordion ·
+demo form · footer. Plus floating WhatsApp button, sticky mobile call/WhatsApp
+bar, light/dark mode, English/Gujarati toggle.
 
 The whole site positions Grevity as **offline-only software on a USB pendrive,
 sold once**. There is no cloud edition and no subscription anywhere in the copy,
@@ -212,11 +287,18 @@ Colours come from the Grevity product palette and live as CSS custom properties
 at the top of `assets/css/style.css` — change them there, not in individual
 rules.
 
-- **Brand:** indigo ramp `--brand-50` … `--brand-900`. Primary CTAs are
-  `#4f46e5` with `#4338ca` on hover, everywhere: hero, mid-page, footer and the
-  sticky mobile bar.
-- **Neutrals:** slate. Light `#ffffff` surfaces on `#f8fafc` sections; dark
-  `#131a2d` surfaces on `#0b1020`.
+- **Brand:** indigo ramp `--brand-50` … `--brand-900`, plus a three-stop
+  signature gradient — `--g1` indigo `#6366f1`, `--g2` violet `#8b5cf6`, `--g3`
+  cyan `#06b6d4`, composed as `--grad`. Every gradient on the page (primary
+  buttons, the active filter chip, the pricing card's border, avatars, the
+  scroll progress bar, `.grad` headline text) uses that one token, so the whole
+  site reads as a single light source. Don't hand-roll new gradients.
+- **Neutrals:** slate. Light `#ffffff` surfaces on `#f7f8fc` sections; dark
+  `#111726` surfaces on `#070a14` — the dark ground is deliberately near-black
+  so the 3D stages read as lit objects rather than flat art.
+- **Glass:** `--glass` / `--glass-border` / `--glass-blur` are one set, shared by
+  the nav, the hero float cards, the stat strip and the 3D hotspot pills. Change
+  them once and every floating panel follows.
 - **Accents** (`--teal`, `--sky`, `--violet`, `--warn`, `--ok`, `--danger`) are
   for icons, tags and status only — never a primary button. Feature cards are
   colour-coded by category the way the app tints its modules: Billing & Money
@@ -237,28 +319,91 @@ Gujarati automatically.
   `prefers-reduced-motion`.
 - Skip link, visible focus rings, labelled form fields with inline errors,
   keyboard-operable nav, filters and accordion.
-- No JS libraries. Three network requests beyond the page itself (two font
-  stylesheets and their fonts). Mockups are inline SVG, so they theme
-  automatically and cost no image bytes.
+- One JS dependency, three.js, and it is loaded *after* first paint, only when
+  the visitor can actually use it (WebGL, motion allowed, not on Save-Data).
+  `main.js` never waits for it. Everything else — fonts, icons, artwork — is
+  self-hosted or inline SVG, so it themes automatically and costs no image
+  bytes.
+- The 3D stages stop rendering when off-screen or when the tab is hidden, and
+  the device pixel ratio is capped at 2, so an idle tab is not burning a GPU.
 - `<noscript>`-safe: reveal animations only apply when JS is present, so content
   is never hidden if scripts fail.
 
 ## SEO
 
-Meta description targets *billing software Rajkot*, *inventory management
-software Gujarat*, *tax billing software for manufacturers*. Includes Open Graph
-+ Twitter cards (`assets/img/og-image.jpg`, 1200×630), canonical URL,
-`sitemap.xml`, `robots.txt`, and a JSON-LD `@graph` with `WebSite`,
-`SoftwareApplication`, a combined `Organization`+`LocalBusiness` node (Rajkot)
-and `FAQPage`.
+**Keyword strategy — read this before rewriting any heading.** Dropping Rajkot
+also dropped the easiest keywords this site had. "Billing software Rajkot" was
+winnable on a new domain; "billing software India" is not — that SERP belongs to
+Vyapar, TallyPrime, Marg and Busy, all with a decade of domain authority. So the
+target is **not** the generic head term. It is the niche the product genuinely
+owns and the incumbents cannot claim:
 
-The `Organization` and `LocalBusiness` types share **one** node under
-`@id: #organization` rather than sitting in two — two nodes both named "Grevity"
-at the same URL reads as two competing entities. `WebSite` and
-`SoftwareApplication` both point at that `@id` as their publisher.
+| Priority | Query family | Why it is winnable |
+|---|---|---|
+| 1 | offline GST billing software · GST billing software without internet | The head term "GST billing software" is brutal on its own; qualified with *offline* it is winnable |
+| 2 | pendrive / USB GST billing software | Effectively uncontested |
+| 3 | billing software no subscription / one yearly fee | Differentiator, and a real buying objection |
+| 4 | BOM production costing software for manufacturers | Narrow, high-intent, few competitors |
 
-`meta keywords` is still in `<head>`; Google has ignored it since 2009. Harmless,
-not worth maintaining.
+**On the GST wording:** the site previously said "Tax Ready" everywhere and never
+used the word GST, which made it invisible for the highest-volume query in this
+market. That was changed deliberately, with the owner's sign-off, to full GST
+language — including **"GST compliant"** in FAQ 3 and the matching `FAQPage`
+schema. That is a claim about the product, not just a keyword: if the invoice
+format, the CGST/SGST/IGST breakup or the HSN handling ever stops meeting the
+current GST rules, this copy has to change with it. Keep the claim and the
+software in sync.
+
+Those phrases are placed in the `<title>`, the `<h1>`, three `<h2>`s and the
+body copy — not stuffed, but present, because they were entirely absent before.
+Re-run the audit in "Checking the SEO" below after editing copy; if a phrase
+drops to zero occurrences, the page has stopped targeting it.
+
+Meta description targets *offline billing software*, *billing software without
+internet*, *inventory software*, *USB pendrive*. Includes Open Graph + Twitter cards
+(`assets/img/og-image.jpg`, 1200×630), canonical URL, `sitemap.xml`,
+`robots.txt`, and a JSON-LD `@graph` with `WebSite`, `SoftwareApplication`,
+`Organization` and `FAQPage`.
+
+`LocalBusiness` was **dropped** along with the Rajkot positioning: the type
+carries an obligation to name a real serving locality, and this is now a
+national, courier-delivered product. `Organization` keeps `addressRegion:
+Gujarat` (true, and where the company is) with `areaServed: India`. `WebSite`
+and `SoftwareApplication` both point at `@id: #organization` as their publisher,
+so there is one entity rather than two competing ones at the same URL.
+
+`meta keywords` is still in `<head>`; Google has ignored it since 2009. Adding a
+phrase there does **nothing** for ranking — if you want to rank for a term it has
+to appear in the title, a heading or the body copy. Harmless, not worth
+maintaining.
+
+### Checking the SEO
+
+There is no build step, so the check is a script. This prints the rendered title
+and description lengths (Google truncates at roughly 60 and 155), the heading
+outline, and how often each target phrase appears in visible copy:
+
+```bash
+python3 - <<'PY'
+import re, html as H
+src = open('index.html', encoding='utf-8').read()
+t = H.unescape(re.search(r'<title>(.*?)</title>', src, re.S).group(1))
+d = H.unescape(re.search(r'<meta name="description" content="(.*?)">', src, re.S).group(1))
+print(f'TITLE {len(t)}: {t}\nDESC  {len(d)}: {d}\n')
+for lvl, txt in re.findall(r'<(h[12])[^>]*>(.*?)</\1>', src, re.S):
+    print(' ', lvl, re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', txt)).strip()[:80])
+body = re.sub(r'<script.*?</script>|<!--.*?-->', ' ', src.split('<body>')[1], flags=re.S)
+low = ' '.join(re.findall(r"[A-Za-z][A-Za-z'-]+", re.sub(r'<[^>]+>', ' ', body))).lower()
+for p in ['offline billing software','billing software','without internet',
+          'inventory management','stock management','invoicing software',
+          'pendrive','no subscription','bill of materials']:
+    print(f'  {low.count(p):3d}  {p}')
+PY
+```
+
+Validate the structured data at <https://validator.schema.org/> after touching
+the JSON-LD — the `FAQPage` block must stay in sync with the visible accordion
+(all 11 questions are mirrored today).
 
 `FAQPage` is kept for machine-readability, but note that since August 2023 Google
 only renders FAQ **rich results** for government and health sites — don't expect
@@ -285,8 +430,13 @@ the accordions to show in the SERP.
   ("Building Circular Value From the Ground Up"). So there is nothing to redirect
   and no Change of Address to file — but there *is* a brand collision: searches
   for "Grevity" alone will surface both. Rank for **"Grevity billing software"**
-  and **"Grevity Rajkot"** rather than the bare brand name, and get the Google
-  Business Profile up so the local pack disambiguates you.
+  and **"Grevity pendrive billing"** rather than the bare brand name, and get the
+  Google Business Profile up so the local pack disambiguates you.
+- **The 3D layer needs a CDN.** three.js is the one third-party runtime
+  dependency. If cdnjs is blocked (some corporate networks) the page is fully
+  intact — the CSS pendrive stays — but nobody on that network sees the WebGL
+  version. If that matters, vendor `three.module.min.js` into `assets/js/` and
+  point the import in `scene.js` at the local copy.
 
 To regenerate the OG image after editing `og-image.svg` — render to PNG, then
 compress to JPEG (the PNG is ~370 KB, the JPEG ~92 KB with no visible artifacts;

@@ -1,6 +1,8 @@
 /* =========================================================
    Grevity — site behaviour
    Vanilla JS, no dependencies. All animation is transform/opacity.
+   The 3D stages live in scene.js and are entirely optional; this
+   file never waits for them.
    ========================================================= */
 (function () {
   'use strict';
@@ -12,7 +14,7 @@
     phone:        '+919426526594',        // tel: link (with country code, no spaces)
     phoneDisplay: '+91 94265 26594',      // shown on screen
     whatsapp:     '919426526594',         // wa.me number: country code + number, digits only
-    waMessage:    'Hello Grevity! I would like a free demo of your billing and inventory software.',
+    waMessage:    'Hello Grevity! I would like a free demo of your offline billing and inventory software.',
 
     // Demo form -> your inbox, via Web3Forms (no backend needed).
     // Get a free access key at https://web3forms.com by entering your email,
@@ -20,7 +22,7 @@
     // form hands every enquiry to WhatsApp instead, so no lead is ever lost.
     formAccessKey: 'be8952a8-8be5-4c3a-9909-9274afdc15fe',
     formEndpoint:  'https://api.web3forms.com/submit',
-    formMailTo:    'infinitixitsolutions@gmail.com'     // shown in the enquiry, for your reference
+    formMailTo:    'grevity.app@gmail.com'     // shown in the enquiry, for your reference
   };
 
   var $  = function (s, c) { return (c || document).querySelector(s); };
@@ -72,10 +74,13 @@
 
   function applyTheme(next) {
     root.classList.toggle('dark', next === 'dark');
-    themeMeta.content = next === 'dark' ? '#0b1020' : '#ffffff';
+    themeMeta.content = next === 'dark' ? '#070a14' : '#ffffff';
     var tb = $('#themeToggle');
     if (tb) tb.setAttribute('aria-label', next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
     try { localStorage.setItem('grevity-theme', next); } catch (e) {}
+    // scene.js relights both 3D stages off this. It may not be loaded — the
+    // event simply goes nowhere, which is the point.
+    document.dispatchEvent(new CustomEvent('grevity:theme', { detail: next }));
   }
 
   /* ---------------- nav ---------------- */
@@ -107,7 +112,7 @@
     if (e.key === 'Escape') closeMenu();
   });
 
-  var spySections = ['problem', 'features', 'local', 'how', 'pricing', 'faq']
+  var spySections = ['problem', 'drive', 'features', 'how', 'pricing', 'faq']
     .map(function (id) { return document.getElementById(id); })
     .filter(Boolean);
 
@@ -314,6 +319,36 @@
     });
   })();
 
+  /* ---------------- pointer light + tilt ----------------
+     Two small pointer effects, both pure CSS custom properties so a
+     device without a pointer simply never triggers them. */
+  (function () {
+    if (reduced || !window.matchMedia('(hover: hover)').matches) return;
+
+    $$('.spot').forEach(function (el) {
+      el.addEventListener('pointermove', function (e) {
+        var r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
+    });
+
+    $$('.tilt').forEach(function (el) {
+      var MAX = 6;                                  // degrees; more reads as a gimmick
+      el.addEventListener('pointermove', function (e) {
+        var r = el.getBoundingClientRect();
+        el.classList.add('is-tilting');
+        el.style.setProperty('--ry', (((e.clientX - r.left) / r.width) - 0.5) * MAX * 2 + 'deg');
+        el.style.setProperty('--rx', (0.5 - ((e.clientY - r.top) / r.height)) * MAX * 2 + 'deg');
+      });
+      el.addEventListener('pointerleave', function () {
+        el.classList.remove('is-tilting');
+        el.style.setProperty('--rx', '0deg');
+        el.style.setProperty('--ry', '0deg');
+      });
+    });
+  })();
+
   /* ---------------- price rendering ----------------
      One plan: a first-year price and a yearly renewal. Both are formatted in
      Indian digit grouping from data-price / data-renew. */
@@ -330,13 +365,18 @@
     return { init: render, render: render };
   })();
 
-  /* ---------------- testimonials marquee ---------------- */
+  /* ---------------- seamless loops ----------------
+     Both strips scroll to -50%, so each needs exactly one duplicate set.
+     Under reduced motion the CSS turns them into plain scrollers instead. */
   (function () {
-    var track = $('#marqueeTrack');
-    if (!track || reduced) return;
-    track.innerHTML += track.innerHTML;                    // seamless -50% loop
-    Array.prototype.slice.call(track.children, track.children.length / 2)
-      .forEach(function (clone) { clone.setAttribute('aria-hidden', 'true'); });
+    if (reduced) return;
+    ['#marqueeTrack', '#tickerTrack'].forEach(function (sel) {
+      var track = $(sel);
+      if (!track) return;
+      track.innerHTML += track.innerHTML;
+      Array.prototype.slice.call(track.children, track.children.length / 2)
+        .forEach(function (clone) { clone.setAttribute('aria-hidden', 'true'); });
+    });
   })();
 
   /* ---------------- FAQ: one open at a time ---------------- */
@@ -523,19 +563,6 @@
       }
     });
   }
-
-  /* ---------------- map outline draw ----------------
-     Measure the real path so the stroke-dash animation covers all of it.
-     Runs synchronously, before the reveal observer can add .in. */
-  (function () {
-    var path = $('.gjmap__shape');
-    if (!path || typeof path.getTotalLength !== 'function') return;
-    var len = Math.ceil(path.getTotalLength());
-    if (len > 0) {
-      path.style.strokeDasharray = len;
-      path.style.strokeDashoffset = len;
-    }
-  })();
 
   /* ---------------- init ---------------- */
   var yearEl = $('#year');
