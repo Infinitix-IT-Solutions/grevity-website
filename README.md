@@ -319,7 +319,9 @@ Gujarati automatically.
   `prefers-reduced-motion`.
 - Skip link, visible focus rings, labelled form fields with inline errors,
   keyboard-operable nav, filters and accordion.
-- One JS dependency, three.js, and it is loaded *after* first paint, only when
+- Two third-party scripts: **Google Analytics 4** (`gtag.js`, property
+  `G-G9C2ZVK8GZ`, at the top of `<head>`, `async` so it never blocks
+  rendering) and **three.js**. three.js is loaded *after* first paint, only when
   the visitor can actually use it (WebGL, motion allowed, not on Save-Data).
   `main.js` never waits for it. Everything else — fonts, icons, artwork — is
   self-hosted or inline SVG, so it themes automatically and costs no image
@@ -328,6 +330,50 @@ Gujarati automatically.
   the device pixel ratio is capped at 2, so an idle tab is not burning a GPU.
 - `<noscript>`-safe: reveal animations only apply when JS is present, so content
   is never hidden if scripts fail.
+
+## Analytics
+
+Google Analytics 4, property **`G-G9C2ZVK8GZ`**. The tag is at the top of
+`<head>`; the custom events are sent by the `track()` helper near the top of
+`main.js`, which does nothing if GA is blocked, so an ad blocker can never break
+the form.
+
+| Event | Fires when | Parameters |
+|---|---|---|
+| `generate_lead` | Demo form **successfully** delivered to Web3Forms | `method` (`demo_form`, or `whatsapp_handoff` if no form key is set), `business_type` (`manufacturer` / `trader` / `retailer` / `other`), `page_language` (`en` / `gu`) |
+| `demo_form_error` | Web3Forms rejects or can't be reached, and the visitor is sent to WhatsApp instead | `error_reason` (first 100 chars), `fallback` |
+| `whatsapp_click` | Any WhatsApp link is clicked | `link_location` |
+| `phone_click` | Any `tel:` link is clicked | `link_location` |
+
+`link_location` comes from a `data-track` attribute on the link:
+`floating_button`, `mobile_bar`, `demo_section`, `footer`. The click listener is
+delegated, so a new call or WhatsApp link is tracked automatically — give it a
+`data-track` too, or it reports as `untagged`.
+
+**No personal data is ever sent.** Name, business name, phone and city stay out
+of every event. GA's terms forbid personal data and a breach can get the
+property deleted. Keep it that way if you add parameters.
+
+**One-time setup in GA4** (the code can't do this for you):
+
+1. **Admin → Events → mark `generate_lead` as a key event.** That makes it a
+   conversion. Mark `generate_lead`, **not** GA's automatic `form_submit`:
+   enhanced measurement fires `form_submit` on every submit attempt, including
+   ones that fail.
+2. **Admin → Custom definitions → create event-scoped custom dimensions** for
+   `link_location`, `business_type`, `method` and `error_reason`. Until you do,
+   the events are counted but their parameters don't appear in reports. This
+   isn't retroactive, so do it before launch.
+3. **Test with `?ga_debug=1`** on the URL (e.g. `https://www.grevity.app/?ga_debug=1`).
+   Events then show live in **Admin → DebugView**.
+
+Watch `demo_form_error`. If it ever climbs, the Web3Forms key or hCaptcha has
+broken and enquiries are going to WhatsApp instead of your inbox.
+
+GA's enhanced measurement also sends its own `click` (outbound links),
+`scroll` and `form_start` events. That's expected and doesn't conflict with the
+custom events above; the custom ones add the button location, and also cover
+phone links, which enhanced measurement ignores.
 
 ## SEO
 
@@ -424,7 +470,9 @@ the accordions to show in the SERP.
   `AggregateRating` schema until they are real — fake review markup earns a
   manual penalty.
 - **Privacy / Terms / Refund are `href="#"`.** Trust signals, and you collect
-  form data, so you need at minimum a privacy policy.
+  form data *and* run Google Analytics (which sets cookies), so you need at
+  minimum a privacy policy that names Google Analytics — Google's own terms
+  require that disclosure.
 - **`grevity.in` is a different company.** Despite the rename in this repo's git
   history, that domain is live and serves an unrelated circular-economy business
   ("Building Circular Value From the Ground Up"). So there is nothing to redirect

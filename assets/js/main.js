@@ -30,6 +30,21 @@
   var root = document.documentElement;
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------------- analytics ----------------
+     Thin wrapper over the GA4 tag in <head>. It no-ops when gtag is missing
+     (ad blockers, script failed) so tracking can never break a lead.
+     Never pass names, phone numbers, emails or business names here — Google
+     Analytics' terms forbid sending personal data, and a violation can get
+     the property deleted. Add ?ga_debug=1 to the URL to see events live in
+     GA4 > Admin > DebugView. */
+  var gaDebug = /[?&]ga_debug=1\b/.test(location.search);
+  function track(name, params) {
+    if (typeof window.gtag !== 'function') return;
+    params = params || {};
+    if (gaDebug) params.debug_mode = true;
+    try { window.gtag('event', name, params); } catch (e) {}
+  }
+
   /* ---------------- i18n ---------------- */
   var DICT = window.GREVITY_GU || {};
   var lang = root.getAttribute('data-lang') === 'gu' ? 'gu' : 'en';
@@ -402,6 +417,18 @@
     $$('a[href^="tel:"]').forEach(function (el) { el.href = 'tel:' + CONFIG.phone; });
   })();
 
+  // One delegated listener covers every call and WhatsApp link, including any
+  // added later. data-track on the link names where it sits, so GA can show
+  // which button actually gets pressed; an untagged link reports "untagged"
+  // rather than disappearing from the numbers.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href*="wa.me/"]');
+    if (!a) return;
+    track(a.getAttribute('href').indexOf('tel:') === 0 ? 'phone_click' : 'whatsapp_click', {
+      link_location: a.getAttribute('data-track') || 'untagged'
+    });
+  });
+
   /* ---------------- demo form ---------------- */
   (function () {
     var form = $('#demoForm');
@@ -481,6 +508,14 @@
                     '\nCity: ' + data.city + '\nPhone: ' + data.phone +
                     '\nType: ' + data.business_type;
 
+      // Captured now, because done() resets the form. Only non-personal fields:
+      // the select's value (not its label, so English and Gujarati visitors
+      // land in the same bucket) and the page language.
+      var leadInfo = {
+        business_type: $('#fType').value,
+        page_language: lang
+      };
+
       function done_silently() {
         status.className = 'form__status ok';
         status.textContent = t('form.thanks', 'Thank you! We will call you within one working day.');
@@ -505,6 +540,8 @@
       if (!CONFIG.formAccessKey || !CONFIG.formEndpoint) {
         // No key yet: hand the enquiry to WhatsApp so nothing is lost.
         window.open(waLink(summary), '_blank', 'noopener');
+        leadInfo.method = 'whatsapp_handoff';
+        track('generate_lead', leadInfo);
         done();
         return;
       }
@@ -523,11 +560,20 @@
         return res.json().catch(function () { return {}; }).then(function (body) {
           // Web3Forms answers 200 with {success:false} on a bad key, so check both.
           if (!res.ok || body.success === false) throw new Error(body.message || 'status ' + res.status);
+          leadInfo.method = 'demo_form';
+          track('generate_lead', leadInfo);
           done();
         });
       }).catch(function (err) {
         // Surface the reason: silent WhatsApp hand-offs are hard to debug otherwise.
         if (window.console) console.warn('Grevity form: could not send —', err && err.message);
+        // Not a lead yet — the visitor is being bounced to WhatsApp. Counted
+        // separately so a broken form key shows up in GA instead of silently
+        // costing enquiries.
+        track('demo_form_error', {
+          error_reason: String((err && err.message) || 'unknown').slice(0, 100),
+          fallback: 'whatsapp'
+        });
         resetCaptcha();
         submit.classList.remove('is-busy');
         status.className = 'form__status bad';

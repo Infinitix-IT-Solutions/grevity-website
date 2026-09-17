@@ -4,6 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
+<!-- Google tag (gtag.js) — GA4 property G-G9C2ZVK8GZ.
+     Placed as high in <head> as Google recommends; `async` means it never
+     blocks rendering. Sets analytics cookies, so the privacy policy must
+     mention Google Analytics before launch. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G9C2ZVK8GZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-G9C2ZVK8GZ');
+</script>
+
 <title>GST Billing Software on a Pendrive — Runs Offline | Grevity</title>
 <meta name="description" content="Offline GST billing, invoicing and inventory software that runs from a USB pendrive — no internet, no server, no monthly fee. Free demo for Indian SMBs.">
 <!-- Google has ignored meta keywords since 2009; it is kept only because some
@@ -893,10 +906,10 @@
         <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="demo.t3">Talk to a real person, not a chatbot</span></li>
       </ul>
       <div class="cta__direct">
-        <a class="btn btn--wa" id="waCtaBtn" href="#" target="_blank" rel="noopener">
+        <a class="btn btn--wa" id="waCtaBtn" data-track="demo_section" href="#" target="_blank" rel="noopener">
           <span class="msym" aria-hidden="true">chat</span><span data-i18n="cta.whatsapp">Chat on WhatsApp</span>
         </a>
-        <a class="btn btn--ghost btn--on" id="callCtaBtn" href="tel:+919426526594">
+        <a class="btn btn--ghost btn--on" id="callCtaBtn" data-track="demo_section" href="tel:+919426526594">
           <span class="msym" aria-hidden="true">call</span><span class="js-phone">+91 94265 26594</span>
         </a>
       </div>
@@ -998,7 +1011,7 @@
 
     <div class="footer__col">
       <h4 data-i18n="footer.contact">Contact</h4>
-      <a class="js-phone-link" href="tel:+919426526594"><span class="msym" aria-hidden="true">call</span><span class="js-phone">+91 94265 26594</span></a>
+      <a class="js-phone-link" data-track="footer" href="tel:+919426526594"><span class="msym" aria-hidden="true">call</span><span class="js-phone">+91 94265 26594</span></a>
       <a href="mailto:grevity.app@gmail.com"><span class="msym" aria-hidden="true">description</span>grevity.app@gmail.com</a>
     </div>
   </div>
@@ -1014,17 +1027,17 @@
 </footer>
 
 <!-- Floating WhatsApp -->
-<a class="fab-wa" id="waFab" href="#" target="_blank" rel="noopener" aria-label="Chat with Grevity on WhatsApp">
+<a class="fab-wa" id="waFab" data-track="floating_button" href="#" target="_blank" rel="noopener" aria-label="Chat with Grevity on WhatsApp">
   <span class="msym" aria-hidden="true">chat</span>
   <span class="fab-wa__text" data-i18n="cta.waShort">WhatsApp</span>
 </a>
 
 <!-- Sticky mobile CTA -->
 <div class="mobar" id="mobar">
-  <a class="mobar__btn" id="mobarCall" href="tel:+919426526594">
+  <a class="mobar__btn" id="mobarCall" data-track="mobile_bar" href="tel:+919426526594">
     <span class="msym" aria-hidden="true">call</span><span data-i18n="cta.call">Call</span>
   </a>
-  <a class="mobar__btn mobar__btn--wa" id="mobarWa" href="#" target="_blank" rel="noopener">
+  <a class="mobar__btn mobar__btn--wa" id="mobarWa" data-track="mobile_bar" href="#" target="_blank" rel="noopener">
     <span class="msym" aria-hidden="true">chat</span><span data-i18n="cta.waShort">WhatsApp</span>
   </a>
   <a class="mobar__btn mobar__btn--primary" href="#demo">
