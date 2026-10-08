@@ -568,7 +568,9 @@ button { font: inherit; color: inherit; }
 /* The float cards are positioned against this, so it has to be the
    containing block — without it they anchor to the viewport and land
    on top of the headline. */
-.hero__art { position: relative; }
+.hero__art { position: relative; align-self: start; }
+.hero__visual { position: relative; }
+.hero__art .trustbar { justify-content: center; margin-top: 28px; position: relative; z-index: 3; }
 
 /* --- The 3D stage. Same shell for both WebGL scenes. --- */
 .stage {
@@ -576,8 +578,6 @@ button { font: inherit; color: inherit; }
   border-radius: var(--r-2xl);
   isolation: isolate;
 }
-.stage__canvas { display: block; width: 100%; height: 100%; touch-action: pan-y; }
-.stage__canvas:focus-visible { box-shadow: var(--ring); border-radius: var(--r-2xl); }
 /* The glow sits behind the drive so the object looks lit from within the page. */
 .stage::before {
   content: ""; position: absolute; z-index: -1; inset: 12% 6%;
@@ -586,70 +586,76 @@ button { font: inherit; color: inherit; }
 }
 /* Bottom-left rather than centred: the floating cards claim the middle and
    the bottom-right of the stage, and a centred hint collides with them. */
-.stage__hint {
-  position: absolute; left: 4px; bottom: 4px;
+.hero__stage { height: clamp(340px, 46vw, 520px); }
+
+/* The stage hosts a WebGL canvas (pendrive3d.js). Until its first frame is on
+   screen — or for good if WebGL, the CDN or Save-Data rule it out — the flat
+   cut-out photo underneath is what the visitor sees. */
+.stage[data-pd] {
+  display: grid; place-items: center;
+  outline: none;
+}
+.stage[data-pd]:focus-visible { box-shadow: var(--ring); }
+.pd-canvas {
+  position: absolute; inset: 0; z-index: 1;
+  display: block; width: 100%; height: 100%;
+  cursor: grab; touch-action: pan-y;
+  opacity: 0; transition: opacity .5s var(--ease);
+}
+.stage.is-live .pd-canvas { opacity: 1; }
+.stage.is-dragging .pd-canvas { cursor: grabbing; }
+.pd-fallback { width: min(86%, 500px); transition: opacity .5s var(--ease); animation: pdBob 5.5s ease-in-out infinite; }
+.stage.is-live .pd-fallback { opacity: 0; animation: none; pointer-events: none; }
+@keyframes pdBob {
+  0%, 100% { transform: translateY(0) rotate(-.6deg); }
+  50%      { transform: translateY(-12px) rotate(.8deg); }
+}
+/* No 3D, no hint: it only makes sense once there is a model. */
+.stage[data-pd]:not(.is-live) .pd-hint { display: none; }
+
+
+.product-shot {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 707 / 568;
+  margin: 0;
+  filter: drop-shadow(0 18px 22px rgba(20, 25, 45, .22));
+}
+.product-shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+.product-shot__brand {
+  position: absolute;
+  left: 46%;
+  top: 56%;
+  transform: translate(-50%, -50%) rotate(-35deg);
+  color: #3a3631;
+  font-family: var(--f-head);
+  font-size: clamp(11px, 2vw, 17px);
+  font-weight: 800;
+  letter-spacing: .24em;
+  text-indent: .24em;
+  line-height: 1;
+  white-space: nowrap;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, .65);
+  pointer-events: none;
+}
+
+.pd-hint {
+  position: absolute; z-index: 2; left: 4px; bottom: 4px;
   display: inline-flex; align-items: center; gap: 6px;
   padding: 5px 13px; border-radius: var(--r-pill);
   background: var(--glass); border: 1px solid var(--border);
   -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
   font-size: .74rem; font-weight: 600; color: var(--muted);
-  opacity: 0; transition: opacity .5s var(--ease) .6s;
+  pointer-events: none;
+  transition: opacity .5s var(--ease);
 }
-.stage.is-live .stage__hint { opacity: 1; }
-.stage__hint .msym { font-size: 15px; }
-
-.hero__stage { height: clamp(340px, 46vw, 520px); }
-
-/* Fallback drive: a real CSS-3D pendrive, shown until (or instead of) WebGL.
-   It is never "the broken state" — on a machine without WebGL this is what
-   the visitor sees, and it still rotates. */
-.fallback3d {
-  position: absolute; inset: 0; display: grid; place-items: center;
-  perspective: 1000px; transition: opacity .6s var(--ease);
-}
-.stage.is-live .fallback3d { opacity: 0; pointer-events: none; }
-.pd {
-  position: relative; width: 260px; height: 84px;
-  transform-style: preserve-3d;
-  animation: pdSpin 16s linear infinite;
-}
-@keyframes pdSpin {
-  from { transform: rotateX(-16deg) rotateY(0deg); }
-  to   { transform: rotateX(-16deg) rotateY(360deg); }
-}
-.pd__face { position: absolute; inset: 0; border-radius: 14px; }
-.pd__front, .pd__back {
-  background: linear-gradient(150deg, #2a3350, #151b2e 60%);
-  border: 1px solid rgba(255,255,255,.14);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.18);
-}
-.pd__front { transform: translateZ(13px); }
-.pd__back  { transform: translateZ(-13px) rotateY(180deg); }
-.pd__side {
-  width: 26px; left: 50%; margin-left: -13px; border-radius: 6px;
-  background: linear-gradient(180deg, #3a4467, #202942);
-}
-.pd__l { transform: rotateY(-90deg) translateZ(130px); }
-.pd__r { transform: rotateY(90deg) translateZ(130px); }
-.pd__cap {
-  position: absolute; left: -46px; top: 12px; width: 52px; height: 60px;
-  border-radius: 8px; transform: translateZ(0);
-  background: linear-gradient(180deg, #cfd6e6, #8e97ad);
-  box-shadow: inset 0 2px 0 rgba(255,255,255,.5);
-}
-.pd__label {
-  position: absolute; inset: 0; display: grid; place-items: center;
-  transform: translateZ(14px);
-  font-family: var(--f-head); font-weight: 800; font-size: .95rem;
-  letter-spacing: .28em; color: #fff; text-indent: .28em;
-}
-.pd__led {
-  position: absolute; right: 14px; top: 50%; width: 9px; height: 9px; margin-top: -4px;
-  border-radius: 50%; transform: translateZ(15px);
-  background: #34d399; box-shadow: 0 0 12px 3px rgba(52, 211, 153, .8);
-  animation: ledBlink 2.6s ease-in-out infinite;
-}
-@keyframes ledBlink { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+.stage.is-used .pd-hint { opacity: 0; }
 
 /* Floating glass cards around the hero drive */
 .floatcard {
@@ -663,8 +669,10 @@ button { font: inherit; color: inherit; }
 .floatcard small { font-size: .74rem; color: var(--muted); }
 .floatcard .msym { color: var(--ok); }
 .floatcard .msym--warn { color: var(--accent); }
-.floatcard--a { left: -26px; top: 14%; animation: bob 6s ease-in-out infinite; }
-.floatcard--b { right: -20px; bottom: 1%; animation: bob 7.5s ease-in-out .8s infinite reverse; }
+.floatcard--a { left: -26px; top: 18%; animation: bob 6s ease-in-out infinite; }
+.floatcard--b { right: -40px; top: 80%; animation: bob 7.5s ease-in-out .8s infinite reverse; }
+.floatcard--c { right: -14px; top: 4%; animation: bob 6.8s ease-in-out 1.6s infinite; }
+.floatcard--d { left: 0; top: 69%; animation: bob 8s ease-in-out .4s infinite reverse; }
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
 /* C. TICKER — the offline promise, on repeat */
@@ -703,34 +711,34 @@ button { font: inherit; color: inherit; }
 .drive { position: relative; overflow: hidden; }
 .drive__grid {
   display: grid; grid-template-columns: .92fr 1.08fr; gap: clamp(28px, 4vw, 60px);
-  align-items: center; position: relative; z-index: 2;
+  align-items: start; position: relative; z-index: 2;
 }
-.drive__stage { height: clamp(380px, 48vw, 560px); }
-/* The stage must fill the sized wrapper — scene.js reads its box to size the
-   renderer, and an auto-height parent collapses the canvas to its 150px
-   intrinsic default. */
-.drive__stage .stage { height: 100%; }
-.drive__stage .stage::before { inset: 18% 10%; opacity: 1; }
+.drive__stage { padding-bottom: clamp(36px, 8vw, 84px); }
+.drive__after { margin-top: 8px; }
 
-/* Hotspots are HTML, positioned every frame from the 3D scene by scene.js.
-   Without WebGL they simply never appear, and the copy beside them carries
-   the same information. */
-.hotspots { position: absolute; inset: 0; pointer-events: none; }
-.hot {
-  position: absolute; transform: translate(-50%, -50%);
-  display: flex; align-items: center; gap: 9px;
-  padding: 7px 13px 7px 9px; border-radius: var(--r-pill);
-  background: var(--glass); border: 1px solid var(--border);
-  -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
-  box-shadow: var(--sh-2); white-space: nowrap;
-  font-size: .76rem; font-weight: 700; color: var(--text-strong);
-  opacity: 0; transition: opacity .35s var(--ease);
+/* Dashboard card with the live pendrive on its bottom-right corner. */
+.dash { position: relative; }
+.dash__card {
+  margin: 0; overflow: hidden;
+  border-radius: 22px; background: #fff;
+  border: 1px solid var(--border);
+  box-shadow: 0 30px 60px -22px rgba(20, 25, 45, .32), 0 6px 16px rgba(20, 25, 45, .08);
+  animation: dashFloat 7s ease-in-out infinite;
 }
-.stage.is-live .hot.is-on { opacity: 1; }
-.hot__k {
-  display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%;
-  background: var(--grad); color: #fff; font-size: .64rem; font-weight: 700;
+.dash__card img { display: block; width: 100%; height: auto; }
+.dash__drive {
+  position: absolute; z-index: 2;
+  right: calc(-8% - 100px); bottom: -24%;
+  width: 60%; aspect-ratio: 4 / 3;
 }
+.dash__drive::before { display: none; }
+.dash__drive .pd-fallback { width: 86%; animation: none; }
+.dash__drive .pd-hint { display: none; }
+@keyframes dashFloat {
+  0%, 100% { transform: translateY(-7px); }
+  50%      { transform: translateY(7px); }
+}
+.drive__after .ticks { margin-top: 0; }
 
 .drive__specs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 26px 0 28px; }
 .spec {
@@ -1101,7 +1109,8 @@ button { font: inherit; color: inherit; }
   .marquee__track, .ticker__track { animation: none; width: auto; }
   .marquee, .ticker { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .aurora__blob { animation: none; }
-  .pd { animation: none; transform: rotateX(-16deg) rotateY(-24deg); }
+  .pd-fallback { animation: none; }
+  .dash__card { animation: none; }
 }
 
 /* ---------- 8. RESPONSIVE ---------- */
@@ -1140,10 +1149,13 @@ button { font: inherit; color: inherit; }
   .hero__cta, .trustbar, .hero__rotator { justify-content: center; }
   .hero__art { margin-top: 16px; max-width: 660px; margin-inline: auto; }
   .floatcard--a { left: -4px; }
-  .floatcard--b { right: -4px; }
+  .floatcard--b { right: -4px; top: 60%; }
+  .floatcard--c { right: -4px; }
+  .floatcard--d { left: 2%; }
+  .hero__art .trustbar { margin-top: 52px; }
 
   .drive__grid, .reach, .cta__inner { grid-template-columns: 1fr; }
-  .drive__stage { order: -1; }
+  .drive__right { order: -1; }
   .grid--3 { grid-template-columns: repeat(2, 1fr); }
   .steps { grid-template-columns: repeat(2, 1fr); row-gap: 34px; }
   .steps::before { display: none; }
@@ -1177,10 +1189,10 @@ button { font: inherit; color: inherit; }
   .chip { flex: none; }
   .floatcard { max-width: 210px; padding: 10px 13px; }
   .floatcard--a { left: -2px; top: 8%; }
-  .floatcard--b { right: -2px; bottom: 8%; }
+  .floatcard--b { right: -2px; top: 60%; bottom: auto; }
+  .floatcard--c { right: -2px; top: 30%; }
+  .floatcard--d { left: -2px; top: 76%; }
   .cta__direct .btn { width: 100%; }
-  /* Hotspot pills crowd the drive at this width; the copy below says the same. */
-  .hotspots { display: none; }
 }
 
 @media (max-width: 380px) {

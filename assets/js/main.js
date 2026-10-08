@@ -1,8 +1,6 @@
 /* =========================================================
    Grevity — site behaviour
    Vanilla JS, no dependencies. All animation is transform/opacity.
-   The 3D stages live in scene.js and are entirely optional; this
-   file never waits for them.
    ========================================================= */
 (function () {
   'use strict';
@@ -93,9 +91,6 @@
     var tb = $('#themeToggle');
     if (tb) tb.setAttribute('aria-label', next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
     try { localStorage.setItem('grevity-theme', next); } catch (e) {}
-    // scene.js relights both 3D stages off this. It may not be loaded — the
-    // event simply goes nowhere, which is the point.
-    document.dispatchEvent(new CustomEvent('grevity:theme', { detail: next }));
   }
 
   /* ---------------- nav ---------------- */

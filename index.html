@@ -64,8 +64,7 @@
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/material-symbols-rounded.woff2" crossorigin>
 
-<!-- The 3D layer is fetched from cdnjs after the page is usable. Warming the
-     connection here saves the DNS + TLS round trip when it is asked for. -->
+<!-- The 3D drive loads three.js from cdnjs after the page is usable; warm the connection. -->
 <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
 <link rel="stylesheet" href="/assets/css/style.css">
@@ -285,55 +284,55 @@
         </a>
         <a class="btn btn--ghost btn--lg" href="#drive" data-i18n="cta.seeDrive">See the pendrive</a>
       </div>
+    </div>
 
-      <ul class="trustbar reveal" data-delay="5">
+    <!-- Cut-out product photo. main.js (pendrive) lets visitors move it with the arrow keys, the on-screen pad or a drag. -->
+    <div class="hero__art reveal" data-delay="3">
+      <div class="hero__visual">
+        <div class="stage hero__stage" data-pd tabindex="0" role="group"
+             aria-label="Interactive Grevity pendrive. Drag it to spin it through 360 degrees, or hover over it and use the arrow keys to move it.">
+          <figure class="product-shot pd-fallback">
+                <img src="/assets/img/grevity-pendrive-cutout.png" width="707" height="568" alt="Silver swivel USB pendrive with GREVITY branding" fetchpriority="high" draggable="false">
+                <span class="product-shot__brand" aria-hidden="true">GREVITY</span>
+              </figure>
+          <span class="pd-hint" data-i18n="stage.keys">Drag or use arrows</span>
+        </div>
+
+        <div class="floatcard floatcard--a" aria-hidden="true">
+          <span class="msym" aria-hidden="true">receipt_long</span>
+          <div>
+            <strong data-i18n="float.invoice">Invoice GRV/25-26/0142</strong>
+            <small data-i18n="float.paid">Paid · ₹1,24,500</small>
+          </div>
+        </div>
+        <div class="floatcard floatcard--b" aria-hidden="true">
+          <span class="msym msym--warn" aria-hidden="true">wifi_off</span>
+          <div>
+            <strong data-i18n="float.offline">Internet down. Still billing.</strong>
+            <small data-i18n="float.offlineSub">Everything runs from the drive</small>
+          </div>
+        </div>
+        <div class="floatcard floatcard--c" aria-hidden="true">
+          <span class="msym msym--warn" aria-hidden="true">inventory_2</span>
+          <div>
+            <strong data-i18n="float.stock">Low stock alert</strong>
+            <small data-i18n="float.stockSub">Nitrile Gloves · 8 left</small>
+          </div>
+        </div>
+        <div class="floatcard floatcard--d" aria-hidden="true">
+          <span class="msym" aria-hidden="true">backup</span>
+          <div>
+            <strong data-i18n="float.backup">Backup saved</strong>
+            <small data-i18n="float.backupSub">One click, to your own disk</small>
+          </div>
+        </div>
+      </div>
+
+      <ul class="trustbar reveal" data-delay="4">
         <li><span class="msym" aria-hidden="true">verified</span><span data-i18n="trust.gst">GST Ready</span></li>
         <li><span class="msym" aria-hidden="true">usb</span><span data-i18n="trust.offline">Runs Offline — Pendrive Edition</span></li>
         <li><span class="msym" aria-hidden="true">shield_lock</span><span data-i18n="trust.secure">Your Data Never Leaves</span></li>
       </ul>
-    </div>
-
-    <!-- The hero pendrive. The CSS drive inside .fallback3d is what a visitor
-         sees on a machine without WebGL, on a metered connection, or with
-         reduced motion switched on — scene.js fades it out only once its own
-         first frame is on screen. -->
-    <div class="hero__art reveal" data-delay="3">
-      <div class="stage hero__stage" data-stage="hero">
-        <canvas class="stage__canvas" id="heroCanvas" tabindex="0"
-                aria-label="Interactive 3D model of the Grevity USB pendrive. Drag or use the arrow keys to turn it."></canvas>
-
-        <div class="fallback3d" aria-hidden="true">
-          <div class="pd">
-            <span class="pd__face pd__front"></span>
-            <span class="pd__face pd__back"></span>
-            <span class="pd__face pd__side pd__l"></span>
-            <span class="pd__face pd__side pd__r"></span>
-            <span class="pd__cap"></span>
-            <span class="pd__label">GREVITY</span>
-            <span class="pd__led"></span>
-          </div>
-        </div>
-
-        <span class="stage__hint">
-          <span class="msym" aria-hidden="true">drag_pan</span>
-          <span data-i18n="stage.hint">Drag to spin</span>
-        </span>
-      </div>
-
-      <div class="floatcard floatcard--a" aria-hidden="true">
-        <span class="msym" aria-hidden="true">receipt_long</span>
-        <div>
-          <strong data-i18n="float.invoice">Invoice GRV/25-26/0142</strong>
-          <small data-i18n="float.paid">Paid · ₹1,24,500</small>
-        </div>
-      </div>
-      <div class="floatcard floatcard--b" aria-hidden="true">
-        <span class="msym msym--warn" aria-hidden="true">wifi_off</span>
-        <div>
-          <strong data-i18n="float.offline">Internet down. Still billing.</strong>
-          <small data-i18n="float.offlineSub">Everything runs from the drive</small>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -453,50 +452,37 @@
         <div class="spec"><span class="spec__val">1</span><span class="spec__k" data-i18n="spec.3">drive, all your companies</span></div>
         <div class="spec"><span class="spec__val">60s</span><span class="spec__k" data-i18n="spec.4">from plugging in to invoicing</span></div>
       </div>
-
-      <ul class="ticks">
-        <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="drive.t1">Your database never leaves your premises — we cannot see it</span></li>
-        <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="drive.t2">Carry it between factory, office and home in your pocket</span></li>
-        <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="drive.t3">Hardware-locked licence — the drive is the key</span></li>
-        <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="drive.t4">One-click backup, so a lost drive is never a lost business</span></li>
-      </ul>
-
-      <a class="btn btn--primary" href="#demo">
-        <span data-i18n="cta.demoFree">Book a Free Demo</span>
-        <span class="msym" aria-hidden="true">arrow_forward</span>
-      </a>
     </div>
 
-    <!-- Second WebGL stage: the same drive, pulled apart as you scroll.
-         The hotspot pills are HTML, positioned from the 3D scene each frame. -->
-    <div class="drive__stage reveal" data-delay="2">
-      <div class="stage" data-stage="anatomy">
-        <canvas class="stage__canvas" id="driveCanvas" tabindex="0"
-                aria-label="Interactive 3D model of the Grevity pendrive, separating into cap, body and USB connector. Drag or use the arrow keys to turn it."></canvas>
-
-        <div class="fallback3d" aria-hidden="true">
-          <div class="pd">
-            <span class="pd__face pd__front"></span>
-            <span class="pd__face pd__back"></span>
-            <span class="pd__face pd__side pd__l"></span>
-            <span class="pd__face pd__side pd__r"></span>
-            <span class="pd__cap"></span>
-            <span class="pd__label">GREVITY</span>
-            <span class="pd__led"></span>
+    <div class="drive__right">
+      <div class="drive__stage reveal" data-delay="2">
+        <!-- The dashboard floats gently; the live 3D pendrive sits at its bottom-right corner. -->
+        <div class="dash">
+          <figure class="dash__card">
+            <img src="/assets/img/dashboard.jpg" width="1700" height="980" alt="Grevity dashboard showing revenue, outstanding payments, invoices issued, low stock, cash flow and receivables" loading="lazy" decoding="async" draggable="false">
+          </figure>
+          <div class="stage dash__drive" data-pd tabindex="0" role="group"
+               aria-label="Interactive Grevity pendrive. Drag it to rotate it in any direction, or hover over it and use the arrow keys to move it.">
+            <figure class="product-shot pd-fallback">
+              <img src="/assets/img/grevity-pendrive-cutout.png" width="707" height="568" alt="Silver swivel USB pendrive with GREVITY branding" loading="lazy" draggable="false">
+              <span class="product-shot__brand" aria-hidden="true">GREVITY</span>
+            </figure>
           </div>
         </div>
+      </div>
 
-        <div class="hotspots" aria-hidden="true">
-          <span class="hot" data-anchor="body"><span class="hot__k">1</span><span data-i18n="hot.1">Your database lives here</span></span>
-          <span class="hot" data-anchor="usb"><span class="hot__k">2</span><span data-i18n="hot.2">Any Windows PC</span></span>
-          <span class="hot" data-anchor="led"><span class="hot__k">3</span><span data-i18n="hot.3">Running — fully offline</span></span>
-          <span class="hot" data-anchor="loop"><span class="hot__k">4</span><span data-i18n="hot.4">Goes home on your keyring</span></span>
-        </div>
+      <div class="drive__after reveal" data-delay="3">
+        <ul class="ticks">
+          <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="drive.t1">Your database never leaves your premises — we cannot see it</span></li>
+          <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="drive.t2">Carry it between factory, office and home in your pocket</span></li>
+          <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="drive.t3">Hardware-locked licence — the drive is the key</span></li>
+          <li><span class="msym" aria-hidden="true">check_circle</span><span data-i18n="drive.t4">One-click backup, so a lost drive is never a lost business</span></li>
+        </ul>
 
-        <span class="stage__hint">
-          <span class="msym" aria-hidden="true">drag_pan</span>
-          <span data-i18n="stage.hint">Drag to spin</span>
-        </span>
+        <a class="btn btn--primary" href="#demo">
+          <span data-i18n="cta.demoFree">Book a Free Demo</span>
+          <span class="msym" aria-hidden="true">arrow_forward</span>
+        </a>
       </div>
     </div>
   </div>
@@ -1048,7 +1034,7 @@
 <script src="https://web3forms.com/client/script.js" async defer></script>
 <script src="/assets/js/i18n-gu.js" defer></script>
 <script src="/assets/js/main.js" defer></script>
-<!-- Modules defer by default, so the 3D layer never delays first paint. -->
-<script type="module" src="/assets/js/scene.js"></script>
+<!-- Modules defer by default, so the 3D drive never delays first paint. -->
+<script type="module" src="/assets/js/pendrive3d.js"></script>
 </body>
 </html>
