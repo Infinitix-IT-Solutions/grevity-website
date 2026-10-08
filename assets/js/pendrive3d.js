@@ -116,18 +116,26 @@ function roundedRect(THREE, shape, x, y, w, h, r) {
   return shape;
 }
 
-/* The wordmark as an alpha mask, laid on the top face so it reads as engraved. */
+/* The Grevity logo printed directly on the metal top face in its own colours.
+   The canvas stays transparent around the logo so only the ink shows. */
+const LOGO_SRC = '/assets/img/grevity-logo-compact.svg';
 function labelTexture(THREE) {
   const c = document.createElement('canvas');
-  c.width = 1024; c.height = 256;
+  c.width = 2048; c.height = 540;
   const x = c.getContext('2d');
-  x.fillStyle = '#fff';
-  x.font = '800 118px Inter, system-ui, sans-serif';
-  x.textAlign = 'center'; x.textBaseline = 'middle';
-  if ('letterSpacing' in x) x.letterSpacing = '28px';
-  x.fillText('GREVITY', c.width / 2 + 14, c.height / 2 + 4);
   const t = new THREE.CanvasTexture(c);
   t.anisotropy = 8;
+  const img = new Image();
+  img.onload = function () {
+    const sr = img.width / img.height, cr = c.width / c.height;
+    let dw, dh;
+    if (sr > cr) { dw = c.width * 0.95;  dh = dw / sr; }
+    else         { dh = c.height * 0.95; dw = dh * sr; }
+    x.clearRect(0, 0, c.width, c.height);
+    x.drawImage(img, (c.width - dw) / 2, (c.height - dh) / 2, dw, dh);
+    t.needsUpdate = true;
+  };
+  img.src = LOGO_SRC;
   return t;
 }
 
@@ -230,17 +238,22 @@ function buildDrive(THREE) {
     root.add(pin);
   }
 
-  /* GREVITY, engraved on the flat of the top face. */
-  const lw = 15.5, lh = lw / 4;
+  /* Grevity logo printed directly on the metal. The map's own alpha channel
+     (transparent canvas around the SVG) handles cut-out — no alphaMap, which
+     would wrongly dim dark colours by reading their green channel. */
+  const logo = labelTexture(THREE);
+  logo.colorSpace = THREE.SRGBColorSpace;
+  const lw = 16, lh = 4.2;
   const mark = new THREE.Mesh(
     new THREE.PlaneGeometry(lw, lh),
-    new THREE.MeshStandardMaterial({
-      color: 0x57534d, metalness: 0.7, roughness: 0.5,
-      alphaMap: labelTexture(THREE), transparent: true, opacity: 0.92,
-      polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2
+    new THREE.MeshBasicMaterial({
+      map: logo,
+      transparent: true, depthWrite: false,
+      polygonOffset: true, polygonOffsetFactor: -4, polygonOffsetUnits: -4
     })
   );
-  mark.position.set(8.4, 0, T / 2 + 0.015);
+  mark.position.set(8.4, 0, T / 2 + 0.08);
+  mark.renderOrder = 2;
   root.add(mark);
 
   // Lay it flat (thickness -> up) and centre it on its own length.
@@ -451,14 +464,6 @@ function mount(THREE, host) {
   }
   if ('ResizeObserver' in window) new ResizeObserver(resize).observe(host);
   else window.addEventListener('resize', resize);
-
-  // The Inter wordmark texture is drawn at build time; redraw it once fonts are in.
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(function () {
-      const m = drive.children[0].children[drive.children[0].children.length - 1];
-      if (m && m.material && m.material.alphaMap) { m.material.alphaMap.dispose(); m.material.alphaMap = labelTexture(THREE); m.material.needsUpdate = true; render(); }
-    });
-  }
 
   resize();
   wake();

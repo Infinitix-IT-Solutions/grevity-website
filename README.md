@@ -11,7 +11,7 @@ index.html            all sections (A–K)
 assets/css/style.css  @font-face block, then design system: tokens, light/dark, layout, animation
 assets/js/main.js     behaviour + CONFIG block (see below)
 assets/js/i18n-gu.js  Gujarati copy deck
-assets/img/           logo (light + dark SVG), app icon, OG image
+assets/img/           logos, app icon, OG image and the pendrive cut-out photo
 assets/fonts/         self-hosted woff2 (see Fonts below)
 sitemap.xml robots.txt site.webmanifest
 ```
@@ -170,42 +170,17 @@ English support, the trades we build for) without tying the product to one
 city. If you add copy, keep it that way: no city in the `<h1>`, the meta
 description, the pricing badge or the testimonials.
 
-## The 3D layer
+## The 3D pendrive
 
-`assets/js/scene.js` builds the pendrive **procedurally in three.js** — no model
-file, no textures, no HDR environment. The wordmark decal, the contact shadow
-and the reflection environment are all drawn to `<canvas>` at runtime, so the
-whole 3D layer costs exactly one dependency and nothing else.
+`assets/js/pendrive3d.js` builds the pendrive procedurally in three.js (loaded
+as an ES module from cdnjs, so there is no model file). Every `[data-pd]` stage
+in `index.html` is one instance: it turns slowly, can be dragged, and responds
+to the arrow keys.
 
-three.js r160 is loaded as an ES module from cdnjs (`<link rel="preconnect">` in
-`<head>` warms the connection). Modules defer by default, so it never delays
-first paint.
-
-Two stages, both marked up with `data-stage` on a `.stage` element:
-
-| `data-stage` | Where | Behaviour |
-|---|---|---|
-| `hero` | hero right column | slow float, idle auto-spin, drag or arrow keys to turn |
-| `anatomy` | `#drive` section | cap and connector separate as the section scrolls, with HTML hotspot pills projected onto the model each frame |
-
-**It is progressive enhancement, and the fallback is not a blank box.** Every
-stage contains a working CSS-3D pendrive (`.fallback3d`). `scene.js` bails out
-entirely — leaving that drive visible — under `prefers-reduced-motion`, on
-`navigator.connection.saveData`, with no WebGL, or if the CDN import fails. The
-CSS drive only fades out once the first WebGL frame has actually rendered, which
-is what adds `.is-live` to the stage.
-
-Both stages pause when scrolled out of view (`IntersectionObserver`) and when the
-tab is hidden. The theme toggle in `main.js` fires a `grevity:theme` event;
-`scene.js` listens and rebuilds the environment map and shell colours, because
-the scene is lit for one ground or the other.
-
-Two gotchas if you move things around: the `.stage` element must have a real
-height (the renderer sizes itself from `host.clientHeight`, and an auto-height
-parent collapses the canvas to its 150px intrinsic default — that is why
-`.drive__stage .stage { height: 100% }` exists), and the hotspot anchors in
-`buildDrive()` deliberately sit *clear* of the model, since a pill laid over the
-drive hides the thing it is labelling.
+It is progressive enhancement. Each stage already contains the flat cut-out
+photo, `assets/img/grevity-pendrive-cutout.png`, with the GREVITY wordmark as an
+HTML overlay. The photo is only hidden once the first 3D frame is on screen, so
+a blocked CDN, no WebGL or Save-Data simply keeps the photo.
 
 **Logo files** — `grevity-logo-compact.svg` (indigo, for light surfaces) and
 `grevity-logo-compact-light.svg` (white, for dark) are both in the navbar and
@@ -269,9 +244,9 @@ its literal ligature name — "wifi_off" — which is how you will notice.)
 
 ## What's in the page
 
-Glass nav with scroll progress · hero with the 3D pendrive and rotating audience
-text · offline-promise ticker · problem-vs-solution cards ·
-**the pendrive section** with the exploding 3D drive and projected hotspots ·
+Glass nav with scroll progress · hero with the branded pendrive and rotating
+audience text · offline-promise ticker · problem-vs-solution cards ·
+**the pendrive section** with the branded product photo ·
 19 features in a filterable bento grid · 4-step timeline · single one-time
 price · languages/trades reach band · testimonial marquee · FAQ accordion ·
 demo form · footer. Plus floating WhatsApp button, sticky mobile call/WhatsApp
@@ -294,10 +269,9 @@ rules.
   scroll progress bar, `.grad` headline text) uses that one token, so the whole
   site reads as a single light source. Don't hand-roll new gradients.
 - **Neutrals:** slate. Light `#ffffff` surfaces on `#f7f8fc` sections; dark
-  `#111726` surfaces on `#070a14` — the dark ground is deliberately near-black
-  so the 3D stages read as lit objects rather than flat art.
+  `#111726` surfaces on `#070a14`.
 - **Glass:** `--glass` / `--glass-border` / `--glass-blur` are one set, shared by
-  the nav, the hero float cards, the stat strip and the 3D hotspot pills. Change
+  the nav, the hero float cards and the stat strip. Change
   them once and every floating panel follows.
 - **Accents** (`--teal`, `--sky`, `--violet`, `--warn`, `--ok`, `--danger`) are
   for icons, tags and status only — never a primary button. Feature cards are
@@ -319,15 +293,9 @@ Gujarati automatically.
   `prefers-reduced-motion`.
 - Skip link, visible focus rings, labelled form fields with inline errors,
   keyboard-operable nav, filters and accordion.
-- Two third-party scripts: **Google Analytics 4** (`gtag.js`, property
+- The only third-party script is **Google Analytics 4** (`gtag.js`, property
   `G-G9C2ZVK8GZ`, at the top of `<head>`, `async` so it never blocks
-  rendering) and **three.js**. three.js is loaded *after* first paint, only when
-  the visitor can actually use it (WebGL, motion allowed, not on Save-Data).
-  `main.js` never waits for it. Everything else — fonts, icons, artwork — is
-  self-hosted or inline SVG, so it themes automatically and costs no image
-  bytes.
-- The 3D stages stop rendering when off-screen or when the tab is hidden, and
-  the device pixel ratio is capped at 2, so an idle tab is not burning a GPU.
+  rendering). Fonts, icons and product photography are self-hosted.
 - `<noscript>`-safe: reveal animations only apply when JS is present, so content
   is never hidden if scripts fail.
 
@@ -480,12 +448,6 @@ the accordions to show in the SERP.
   for "Grevity" alone will surface both. Rank for **"Grevity billing software"**
   and **"Grevity pendrive billing"** rather than the bare brand name, and get the
   Google Business Profile up so the local pack disambiguates you.
-- **The 3D layer needs a CDN.** three.js is the one third-party runtime
-  dependency. If cdnjs is blocked (some corporate networks) the page is fully
-  intact — the CSS pendrive stays — but nobody on that network sees the WebGL
-  version. If that matters, vendor `three.module.min.js` into `assets/js/` and
-  point the import in `scene.js` at the local copy.
-
 To regenerate the OG image after editing `og-image.svg` — render to PNG, then
 compress to JPEG (the PNG is ~370 KB, the JPEG ~92 KB with no visible artifacts;
 JPEG is chosen over WebP because LinkedIn and some WhatsApp clients still won't

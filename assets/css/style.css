@@ -604,12 +604,7 @@ button { font: inherit; color: inherit; }
 }
 .stage.is-live .pd-canvas { opacity: 1; }
 .stage.is-dragging .pd-canvas { cursor: grabbing; }
-.pd-fallback { width: min(86%, 500px); transition: opacity .5s var(--ease); animation: pdBob 5.5s ease-in-out infinite; }
-.stage.is-live .pd-fallback { opacity: 0; animation: none; pointer-events: none; }
-@keyframes pdBob {
-  0%, 100% { transform: translateY(0) rotate(-.6deg); }
-  50%      { transform: translateY(-12px) rotate(.8deg); }
-}
+.pd-fallback { display: none; }
 /* No 3D, no hint: it only makes sense once there is a model. */
 .stage[data-pd]:not(.is-live) .pd-hint { display: none; }
 
